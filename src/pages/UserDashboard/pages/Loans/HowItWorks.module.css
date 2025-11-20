@@ -1,0 +1,85 @@
+.container {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.titleIconContainer {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.titleIcon {
+  height: 1.4rem;
+  width: 1.4rem;
+  color: #4b5563;
+}
+
+.stepsContainer {
+  position: relative;
+}
+
+.connectorLine {
+  position: absolute;
+  left: 1.35rem;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  width: 0.125rem;
+  background-color: #e5e7eb;
+  z-index: 0;
+}
+
+.steps {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.step {
+  display: flex;
+}
+
+.stepNumber {
+  flex-shrink: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  background-color: rgb(106 143 219);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  z-index: 10;
+  font-weight: 700;
+  color: white;
+}
+
+.stepContent {
+  padding-top: 0.25rem;
+}
+
+.stepTitle {
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.stepDescription {
+  font-size: 0.875rem;
+  color: #4b5563;
+}

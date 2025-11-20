@@ -1,0 +1,65 @@
+.page-hero {
+  padding: 150px 100px;
+  background-image: url(../../assets/register_bg.jpg);
+  background-position: center center;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: color-dodge;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* position: relative; */
+  margin-top: 80px;
+}
+
+.page-hero .sub-header-text {
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.page-hero-text-container {
+  z-index: 2;
+  position: relative;
+}
+
+.page-hero .sub-p {
+  text-align: center;
+  color: white;
+  width: 80%;
+  margin: auto;
+}
+
+.page-hero .flex,
+.pay-bills .flex {
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  z-index: 2;
+  position: relative;
+}
+
+.page-hero .purple-btn:nth-child(2) {
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+.page-hero .purple-btn {
+  border-radius: 50px;
+}
+
+@media (max-width: 500px) {
+  .page-hero {
+    padding: 40px 20px;
+  }
+
+  .page-hero .sub-p,
+  .about-services .sub-p,
+  .about-what-we-do .sub-p {
+    width: 100%;
+  }
+
+  .page-hero .flex,
+  .pay-bills .flex {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

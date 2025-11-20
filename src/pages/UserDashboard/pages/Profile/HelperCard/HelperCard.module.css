@@ -1,0 +1,62 @@
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.iconContainer {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  background-color: #f0f9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: #4b5563;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.cardText {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.contactLink:hover {
+  color: #1d4ed8;
+}
+
+.linkIcon {
+  height: 1rem;
+  width: 1rem;
+  margin-left: 0.25rem;
+}

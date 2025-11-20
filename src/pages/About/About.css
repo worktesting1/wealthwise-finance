@@ -1,0 +1,139 @@
+.about-section {
+  background-image: url(../../assets/6.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.about-services {
+  text-align: center;
+  padding: 70px 80px;
+  background-color: white;
+}
+
+.about-services .sub-p,
+.about-what-we-do .sub-p {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+}
+
+.about-section .card-container {
+  padding-top: 0px;
+  background-color: white;
+  overflow-x: hidden;
+}
+
+.about-what-we-do {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px;
+  background-color: white;
+}
+
+.about-brief {
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.about-brief .purple-btn {
+  border-radius: 0px;
+  background-color: transparent;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+
+.about-brief .purple-btn:nth-child(1) {
+  background-color: #2563eb;
+  color: white;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.about-section .transaction-sect {
+  align-items: center;
+  padding-top: 0px;
+  background-color: white;
+}
+
+.about-section .transaction-image-container img {
+  width: 100%;
+}
+
+.pay-bills {
+  background-color: rgba(78, 228, 183, 0.7);
+  padding: 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 150px;
+}
+
+.pay-bills .sub-header-text,
+.pay-bills .sub-p {
+  text-align: center;
+  color: white;
+}
+
+.about-section .pay-bills .flex {
+  flex-direction: column;
+  gap: 50px;
+}
+
+.about-section .pay-bills .flex .purple-btn:nth-child(1) {
+  background-color: white;
+  color: #2563eb;
+}
+
+.about-part-two {
+  padding-top: 100px;
+  background-color: white;
+}
+
+.about-part-two h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #262934;
+  margin-bottom: 15px;
+}
+
+.about-part-two .transaction-sect {
+  gap: 30px;
+}
+
+@media (max-width: 500px) {
+  .about-services {
+    padding: 40px 20px;
+  }
+
+  .about-section .card-container {
+    padding: 40px 20px;
+  }
+
+  .about-what-we-do {
+    padding: 40px 20px;
+  }
+
+  .about-brief {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .about-brief .purple-btn {
+    width: 90%;
+    margin: auto;
+  }
+
+  .diff {
+    text-align: start;
+  }
+
+  .pay-bills {
+    padding: 80px 20px;
+  }
+}

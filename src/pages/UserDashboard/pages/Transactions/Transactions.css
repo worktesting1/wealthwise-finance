@@ -1,0 +1,303 @@
+.user_transactions {
+  margin-top: 80px;
+  padding: 20px;
+  margin-bottom: 80px;
+}
+
+.user_transactions > h2 {
+  color: rgb(17 24 39);
+  font-weight: 700;
+  line-height: 2rem;
+  font-size: 1.5rem;
+}
+
+.transactions_filter_sect {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transactions_filter_sect button,
+.transactions_filter_search_bar {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  border: rgb(209 213 219) solid 1px;
+  height: 40px;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #2563eb;
+  color: white;
+  width: 200px;
+  justify-content: center;
+}
+
+.transactions_filter_search_bar {
+  margin-top: 20px;
+  height: 50px;
+  color: rgb(55 65 81);
+  width: 100%;
+  gap: 0;
+  background-color: white;
+  font-weight: 500;
+}
+
+.transactions_filter_search_bar input {
+  width: 85%;
+  height: 100%;
+  color: rgb(55 65 81);
+}
+
+/* Base styles */
+.export-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 507;
+  overflow-y: auto;
+}
+
+.export-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem 1rem 5rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .export-modal-container {
+    align-items: center;
+    padding: 0;
+  }
+}
+
+.export-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  transition-property: opacity;
+  background-color: rgba(107, 114, 128, 0.75);
+}
+
+.export-modal-content {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1rem 1rem;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(0);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .export-modal-content {
+    vertical-align: middle;
+    padding: 1.5rem;
+  }
+}
+
+/* Close button */
+.export-modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem 1rem 0 0;
+}
+
+.export-modal-close-btn {
+  background-color: white;
+  border-radius: 0.375rem;
+  color: #9ca3af;
+}
+
+.export-modal-close-btn:hover {
+  color: #6b7280;
+}
+
+.export-modal-close-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Header */
+.export-modal-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.export-modal-icon-container {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 9999px;
+  background-color: #dbeafe;
+  margin-bottom: 1rem;
+}
+
+.export-modal-icon {
+  height: 2rem;
+  width: 2rem;
+  color: #2563eb;
+}
+
+.export-modal-title {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.export-modal-description {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #6b7280;
+}
+
+/* Body */
+.export-modal-body {
+  margin-top: 1.25rem;
+}
+
+.export-modal-field {
+  margin-bottom: 1rem;
+}
+
+.export-modal-label {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.export-modal-select {
+  display: block;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.625rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.export-modal-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Style options */
+.export-style-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.export-style-option {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.export-style-option:hover {
+  background-color: #f9fafb;
+}
+
+.export-style-selected {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.export-style-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.export-style-preview {
+  height: 3rem;
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.export-style-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #6b7280;
+}
+
+/* Footer */
+.export-modal-footer {
+  margin-top: 1.5rem;
+}
+
+.export-modal-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  color: white;
+  background-color: #2563eb;
+  font-family: "Poppins", sans-serif;
+}
+
+.export-modal-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.export-modal-btn:focus {
+  outline: none;
+}
+
+.export-modal-btn-icon {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+}

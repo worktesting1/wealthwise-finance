@@ -1,0 +1,98 @@
+.container {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.iconContainer {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.icon {
+  height: 1.4rem;
+  width: 1.4rem;
+  color: #4b5563;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.cardIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: #3b82f6;
+  margin-right: 0.5rem;
+}
+
+.cardTitle {
+  font-weight: 500;
+  color: #111827;
+}
+
+.cardText {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.viewAll {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.viewAllLink {
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.viewAllLink:hover {
+  color: #1d4ed8;
+}
+
+.linkIcon {
+  height: 1rem;
+  width: 1rem;
+  margin-left: 0.25rem;
+}

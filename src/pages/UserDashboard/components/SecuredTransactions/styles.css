@@ -1,0 +1,149 @@
+/* Secure Transaction Notice Component */
+.secure-transaction-notice {
+  line-height: 1.5;
+}
+
+.secure-transaction-notice .notice-content {
+  flex-direction: row;
+  align-items: start;
+}
+
+.secure-transaction-notice .notice-content h3 {
+  font-weight: 600;
+}
+.notice-container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 15px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.notice-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-container {
+  flex-shrink: 0;
+  margin: 0 !important;
+  margin-top: 0.125rem;
+}
+
+.shield-icon {
+  color: #3b82f6;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notice-title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+.notice-description {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  color: #6b7280 !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Secure Transaction Component Styles */
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.flex {
+  display: flex;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.text-primary-500 {
+  color: #3b82f6;
+}
+
+.h-5 {
+  height: 1.25rem;
+}
+
+.w-5 {
+  width: 1.25rem;
+}
+
+/* SVG specific styles */
+.lucide {
+  display: inline-block;
+  vertical-align: middle;
+}

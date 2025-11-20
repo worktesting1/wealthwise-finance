@@ -1,0 +1,40 @@
+.register-container {
+  padding: 100px;
+}
+
+.register-container > div {
+  background-color: #fff;
+  -webkit-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.register-form input {
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  margin-bottom: 15px;
+}
+
+.register-form .btn {
+  margin-top: 10px;
+}
+
+.css-qbdosj-Input {
+  height: 50px;
+}
+
+@media (max-width: 500px) {
+  .register-container {
+    padding: 40px 20px;
+  }
+
+  .register-container > div {
+    padding: 40px 20px;
+  }
+}

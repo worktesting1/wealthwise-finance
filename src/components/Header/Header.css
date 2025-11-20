@@ -1,0 +1,91 @@
+.header {
+  background-color: black;
+  height: 100px;
+  padding: 30px 80px;
+  justify-content: space-between;
+  box-shadow: 0 3px 8px #0005;
+  color: white;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.dash_btn {
+  transform: translateX(300px);
+}
+
+.header > div {
+  width: 50%;
+}
+
+.header > svg,
+.header ul svg {
+  display: none;
+}
+
+.header ul {
+  gap: 20px;
+  position: static;
+  transition: all 200ms ease-in-out;
+}
+
+.relative {
+  transform: translateX(270px);
+}
+
+.header a {
+  color: white;
+  font-weight: 500;
+}
+
+.header-logo-container img {
+  width: 150px;
+}
+
+@media (max-width: 500px) {
+  .header {
+    padding: 30px;
+    height: 80px;
+  }
+
+  .header > svg,
+  .header ul svg {
+    display: block;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .header > div {
+    width: 100%;
+  }
+
+  .header ul {
+    position: fixed;
+    inset: 0;
+    background-color: black;
+    z-index: 3;
+    gap: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 20px;
+    left: 25%;
+    transform: translateX(400px) !important;
+    transition: all ease-in-out 200ms;
+  }
+
+  .header .open-nav {
+    transform: translateX(0px) !important;
+  }
+
+  .header ul a {
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid white;
+    display: block;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+}

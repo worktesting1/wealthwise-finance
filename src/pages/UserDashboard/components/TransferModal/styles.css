@@ -1,0 +1,261 @@
+.transfer_modal {
+  background-color: #f4f5f8;
+  position: fixed;
+  transition: all ease-in-out 300ms;
+  z-index: 49;
+  top: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.removeTransferModal {
+  transform: translateX(1800px);
+}
+
+.showTransferModal {
+  transform: translateX(0px);
+}
+
+.transfer_modal_header {
+  background-color: #2563eb;
+  padding: 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+@media (max-width: 600px) {
+  .transfer_modal_header {
+    margin-top: 80px;
+  }
+}
+
+.modal_image_wrapper {
+  height: 80px;
+  width: 80px;
+  border-radius: 50px;
+  background-color: rgb(255 255 255 / 0.2);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_image_wrapper img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.transfer_modal_header h1 {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.transfer_modal_header .tiny_text {
+  text-align: center;
+}
+
+.transfer_modal_form {
+  padding: 40px 20px;
+  background-color: white;
+  margin-bottom: 130px;
+}
+
+.transfer_modal_form .tiny_text {
+  color: rgb(55 65 81);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.transfer_modal_form input {
+  border: 1px rgb(55 65 81) solid;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  color: rgb(55 65 81);
+  font-family: "Poppins", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.transfer_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  color: white;
+  background-color: #2563eb;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+/* Modal overlay */
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal container */
+.success-modal {
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 350px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Success icon */
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background-color: #e6f7ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon svg {
+  width: 40px;
+  height: 40px;
+  color: #22c55e;
+}
+
+/* Text styles */
+.success-modal h2 {
+  font-size: 24px !important;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px !important;
+}
+
+.success-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: #22c55e;
+  margin: 10px 0 20px;
+}
+
+.recipient-info {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.recipient-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Transaction details */
+.transaction-details {
+  text-align: left;
+  margin: 25px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.detail-row span:first-child {
+  color: #666;
+  font-weight: 500;
+}
+
+.detail-row span:last-child {
+  color: #333;
+}
+
+/* Buttons */
+.close-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #f1f5f9;
+  color: #334155;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+
+.close-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.receipt-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+
+.receipt-btn:hover {
+  background-color: #16a34a;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

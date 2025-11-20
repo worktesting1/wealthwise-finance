@@ -1,0 +1,56 @@
+.loan-services-container {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    #2563eb,
+    #1d4ed8
+  ); /* Assuming primary-600 is #2563eb and primary-700 is #1d4ed8 */
+  padding: 2rem 1.5rem;
+  margin-top: 25px;
+}
+
+.loan-services-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.banknote-icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  color: white;
+}
+
+.loan-services-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.loan-services-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+.wave-decoration {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.wave-svg {
+  height: 3rem;
+  width: 100%;
+  color: white;
+  fill: currentColor;
+}

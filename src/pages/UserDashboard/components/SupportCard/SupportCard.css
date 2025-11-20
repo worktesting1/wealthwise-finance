@@ -1,0 +1,109 @@
+/* Main card container */
+.help-card-container {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0f2fe 100%);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #bfdbfe;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 100px;
+}
+
+/* Card content area */
+.help-card-content {
+  padding: 24px;
+  text-align: center;
+}
+
+/* Icon wrapper */
+.help-card-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* White circle for icon */
+.help-card-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Help icon styling */
+.help-card-icon {
+  width: 40px;
+  height: 40px;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: #0284c7;
+}
+
+/* Title text */
+.help-card-title {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+/* Description text */
+.help-card-description {
+  font-size: 14px;
+  line-height: 20px;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+/* Button wrapper */
+.help-card-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Support button */
+.help-card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background-color: #0284c7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.help-card-button:hover {
+  background-color: #0369a1;
+  transform: translateY(-1px);
+}
+
+/* Message icon in button */
+.help-card-message-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-right: 8px;
+}
+
+@media (min-width: 601px) {
+  .help-card-container {
+    margin-top: 20px;
+  }
+}

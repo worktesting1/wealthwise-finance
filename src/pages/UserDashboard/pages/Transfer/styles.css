@@ -1,0 +1,10 @@
+.transfer_page {
+  margin-bottom: 100px;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.transfer_page h2 {
+  font-size: 25px;
+  margin-bottom: 40px;
+}

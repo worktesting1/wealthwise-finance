@@ -1,0 +1,342 @@
+/* Modal Overlay */
+.deposit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal Container */
+.deposit-modal {
+  background-color: white;
+  width: 100%;
+  max-width: 600px;
+  max-height: 100vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Close Button */
+.deposit-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.deposit-close-button:hover {
+  background-color: #f5f5f5;
+}
+
+.deposit-close-button svg {
+  width: 20px;
+  height: 20px;
+  fill: #666;
+}
+
+/* Header */
+.modal-header {
+  padding: 25px 25px 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Tab Switcher */
+.tab-switcher {
+  display: flex;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+  padding: 4px;
+  margin-bottom: 5px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #6b7280;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.tab-button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.tab-button.active {
+  background-color: white;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 20px 25px;
+}
+
+/* Info Box */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+}
+
+.info-box svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: #0369a1;
+  margin-top: 2px;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #075985;
+}
+
+/* Crypto Deposit */
+.crypto-wallet {
+  margin-bottom: 25px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.crypto-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.crypto-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #111827;
+}
+
+.crypto-wallet h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+
+.address-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.address {
+  flex: 1;
+  padding: 10px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy-button {
+  padding: 0 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.copy-button.small {
+  padding: 0 8px;
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.copy-button:hover {
+  background-color: #2563eb;
+}
+
+.copy-button.copied {
+  background-color: #10b981;
+}
+
+.qr-code-placeholder {
+  text-align: center;
+}
+
+.qr-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  background-color: #f3f4f6;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.crypto-note {
+  margin-top: 20px;
+}
+
+.crypto-note h4 {
+  font-size: 15px;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.crypto-note ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.crypto-note li {
+  margin-bottom: 8px;
+}
+
+/* Bank Deposit */
+.bank-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 480px) {
+  .bank-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-row span:first-child {
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.detail-row span:last-child {
+  color: #111827;
+  text-align: right;
+  word-break: break-all;
+}
+
+.bank-note {
+  margin-top: 20px;
+}
+
+.bank-note h4 {
+  font-size: 15px;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.bank-note ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.bank-note li {
+  margin-bottom: 8px;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 15px 25px;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.support-button {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.support-button:hover {
+  background-color: #eff6ff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

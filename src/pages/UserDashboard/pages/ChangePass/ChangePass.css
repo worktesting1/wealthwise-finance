@@ -1,0 +1,9 @@
+.change_pass {
+    background-color: black;
+    padding: 100px 30px;
+}
+
+
+.change_pass .kyc-verification .sub-p:nth-of-type(1) {
+    text-align: start;
+}

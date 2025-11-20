@@ -1,0 +1,125 @@
+/* Stats cards container */
+.stats-cards-container {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 80px;
+  font-family: "Poppins" sans-serif;
+}
+
+/* Individual card styling */
+.stats-card {
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid;
+}
+
+/* Balance card */
+.balance-card {
+  background: linear-gradient(to right, #eff6ff, #ffffff);
+  border-color: #bfdbfe;
+}
+
+/* Income card */
+.income-card {
+  background: linear-gradient(to right, #f0fdf4, #ffffff);
+  border-color: #bbf7d0;
+}
+
+/* Outgoing card */
+.outgoing-card {
+  background: linear-gradient(to right, #fef2f2, #ffffff);
+  border-color: #fecaca;
+}
+
+/* Limit card */
+.limit-card {
+  background: linear-gradient(to right, #f5f3ff, #ffffff);
+  border-color: #ddd6fe;
+}
+
+/* Stats label */
+.stats-label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #6b7280;
+}
+
+/* Stats value */
+.stats-value {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.income-value {
+  color: #166534;
+}
+
+.outgoing-value {
+  color: #991b1b;
+}
+
+.limit-value {
+  color: #6b21a8;
+}
+
+/* Icon container */
+.stats-icon-container {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balance-card .stats-icon-container {
+  background-color: #bfdbfe;
+}
+
+.income-icon-container {
+  background-color: #bbf7d0;
+}
+
+.outgoing-icon-container {
+  background-color: #fecaca;
+}
+
+.limit-icon-container {
+  background-color: #ddd6fe;
+}
+
+/* Icon styling */
+.stats-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.balance-card .stats-icon {
+  color: #1f2937;
+}
+
+.income-card .stats-icon {
+  color: #166534;
+}
+
+.outgoing-card .stats-icon {
+  color: #991b1b;
+}
+
+.limit-card .stats-icon {
+  color: #6b21a8;
+}
+
+/* Responsive styles */
+@media (min-width: 1024px) {
+  .stats-cards-container {
+    display: grid;
+  }
+}

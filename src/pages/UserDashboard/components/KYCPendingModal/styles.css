@@ -1,0 +1,205 @@
+/* Modal Overlay */
+.kyc-pending-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal Container */
+.kyc-pending-modal {
+  background-color: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.4s ease-out;
+  height: 100vh;
+}
+
+/* Content Styling */
+.kyc-pending-content {
+  text-align: center;
+}
+
+.status-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-icon.pending {
+  background-color: #fffbeb;
+}
+
+.status-icon.pending svg {
+  width: 40px;
+  height: 40px;
+  fill: #f59e0b;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+.status-message {
+  margin-bottom: 25px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.status-message strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin: 25px 0;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 60%;
+  background-color: #f59e0b;
+  border-radius: 3px;
+  animation: progressPulse 2s infinite;
+}
+
+.progress-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* What's Next Section */
+.whats-next {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.whats-next h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.whats-next ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.whats-next li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.whats-next li:before {
+  content: "•";
+  position: absolute;
+  left: 8px;
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.support-button {
+  padding: 10px 20px;
+  background-color: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.support-button:hover {
+  background-color: #d97706;
+}
+
+.pending_kyc_close_button {
+  padding: 10px 20px;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: "Poppins", sans-serif;
+}
+
+.close-button:hover {
+  background-color: #e5e7eb;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes progressPulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}

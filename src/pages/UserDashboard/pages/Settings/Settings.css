@@ -1,0 +1,29 @@
+.user_settings {
+    background-color: black;
+    height: 100vh;
+}
+
+.user_settings_main {
+    margin-top: 60px;
+    padding: 50px 20px;
+}
+
+.user_settings_main .sub-p {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.user_settings .user_profile_details {
+    margin: 0px;
+    padding: 0px;
+}
+
+.user_settings .user_profile_details .flex {
+    justify-content: space-between;
+    color: white;
+    cursor: pointer;
+}
+
+.user_settings .user_profile_details .flex h3 {
+    margin-bottom: 0px;
+}

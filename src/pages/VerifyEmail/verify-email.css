@@ -1,0 +1,53 @@
+.verify-email-page {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 40px 0;
+}
+
+.verify-email-page .logo {
+  width: 40%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.verify-email-page .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.verify-email-page .content img {
+  width: 70%;
+  height: 70%;
+}
+
+.verify-email-page .content h4 {
+  font-weight: 500;
+  width: 90%;
+  text-align: center;
+  margin-top: 20px;
+  line-height: 26px;
+}
+
+@media screen and (min-width: 1200px) {
+  .verify-email-page .logo {
+    width: 20%;
+    height: 10%;
+  }
+
+  .verify-email-page .content img {
+    width: auto;
+    height: auto;
+  }
+
+  .verify-email-page .content h4 {
+    width: 60%;
+  }
+}

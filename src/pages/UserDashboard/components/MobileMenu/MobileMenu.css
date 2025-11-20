@@ -1,0 +1,229 @@
+/* Overlay styling */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 51;
+}
+
+/* Menu container styling */
+.mobile-menu-container {
+  position: relative;
+  width: 91.6667%;
+  max-width: 28rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 1.25rem;
+  z-index: 50;
+  overflow: auto;
+  margin-top: 80px;
+}
+
+/* Close button */
+.mobile-menu-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: rgba(156, 163, 175);
+  transition: color 0.2s;
+}
+
+.mobile-menu-close-btn:hover {
+  color: rgba(107, 114, 128);
+}
+
+.mobile-menu-close-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* User info */
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(243, 244, 246);
+}
+
+.mobile-user-avatar {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+  width: 3rem;
+  height: 3rem;
+}
+.mobile-user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: solid 2px rgb(229 231 235);
+  margin: auto;
+  border-radius: 50px;
+}
+
+.user-details h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(17, 24, 39);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.user-details p {
+  font-size: 0.875rem;
+  color: rgba(107, 114, 128);
+  margin: 0;
+}
+
+.verification-badge {
+  margin-top: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba(220, 252, 231);
+  color: rgba(22, 101, 52);
+  display: inline-flex;
+  align-items: center;
+}
+
+.verification-badge svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.25rem;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Menu title */
+.menu-title {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.menu-title h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(31, 41, 55);
+  margin: 0;
+}
+
+.menu-title p {
+  font-size: 0.875rem;
+  color: rgba(107, 114, 128);
+  margin: 0;
+}
+
+/* Menu grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.menu-item {
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.menu-item.primary {
+  background: linear-gradient(
+    to bottom right,
+    rgba(224, 242, 254),
+    rgba(186, 230, 253)
+  );
+}
+
+.menu-item.secondary {
+  background: linear-gradient(
+    to bottom right,
+    rgba(240, 249, 255),
+    rgba(224, 242, 254)
+  );
+}
+
+.menu-item.accent {
+  background: linear-gradient(
+    to bottom right,
+    rgba(254, 243, 199),
+    rgba(253, 230, 138)
+  );
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon-wrapper {
+  margin-bottom: 0.25rem;
+}
+
+.menu-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s;
+}
+
+.menu-item:hover .menu-icon {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.menu-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menu-item.primary .menu-icon svg,
+.menu-item.accent .menu-icon svg {
+  color: rgba(0, 0, 0);
+}
+
+.menu-item.secondary .menu-icon svg {
+  color: rgba(37, 99, 235);
+}
+
+.menu-item span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(55, 65, 81);
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 360px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

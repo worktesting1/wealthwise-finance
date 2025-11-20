@@ -1,0 +1,14 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 50px;
+  line-height: 19.5px;
+  font-weight: 700;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
