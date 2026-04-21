@@ -1,7 +1,7 @@
 import { createClient } from "@sanity/client";
 
 export const client = createClient({
-  projectId: "bbauwcb4",
+  projectId: "2qn5yyrb",
   dataset: "production",
   useCdn: true, // set to `false` to bypass the edge cache
   apiVersion: "2025-08-09", // use current date (YYYY-MM-DD) to target the latest API version
