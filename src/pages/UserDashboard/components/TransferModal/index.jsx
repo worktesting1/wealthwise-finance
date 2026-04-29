@@ -37,7 +37,7 @@ function TransferModal({
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
   const { _id, firstName, lastName, email } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails;
-
+const kyced = true
   const {
     handleSubmit,
     register,
@@ -142,10 +142,10 @@ function TransferModal({
       data.destinationAddress = data.cashTag;
     }
 
-    if (isKYC === null) {
+    if (kyced === null) {
       setShowKYCModal(true);
     }
-    if (isKYC === false) {
+    if (kyced === false) {
       setShowPendingModal(true);
     } else {
       setLoader(true);
