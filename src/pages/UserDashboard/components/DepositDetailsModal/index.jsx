@@ -12,10 +12,10 @@ const DepositDetailsModal = ({ show, onClose, setActiveTab, activeTab }) => {
   const [bankDetails, setBankDetails] = useState([]);
   const [loader, setLoader] = useState(false);
   const [errors, setErrors] = useState({});
-  const { _id, firstName, lastName, email, cardAmount } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
   const { userDetails, baseUrl, cardFormData, pathHistory } =
     useGlobalContext();
+  const { _id, firstName, lastName, email, cardAmount } =
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const [amount, setAmount] = useState(
     pathHistory.length === 0 ? "" : cardAmount
   );

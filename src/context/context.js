@@ -278,6 +278,7 @@ const AppProvider = ({ children }) => {
         pathHistory,
         setCardFormData,
         cardFormData,
+        userDetails: userData,
       }}
     >
       {children}

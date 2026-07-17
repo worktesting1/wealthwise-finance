@@ -11,7 +11,7 @@ const DesktopHeader = () => {
   const { totalAmount, formatNumber, userDetails } = useGlobalContext();
   const navigate = useNavigate();
   const { accountNum, firstName, profileImage, lastName, isKYC } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const totalBalance =
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
@@ -60,7 +60,7 @@ const DesktopHeader = () => {
           <a href="/" className="mobile-logo-link">
             <img
               src={
-                profileImage.length === 1
+                profileImage?.length === 1
                   ? profileImage[0]?.url
                   : "https://fwiseb.online/storage/app/public/photos/3N7b4OlUEd4Vsl8Wfe3npP81eOp11bQoLLIYtB8y.png"
               }
@@ -131,7 +131,7 @@ const DesktopHeader = () => {
               <img
                 className="user-avatar"
                 src={
-                  profileImage.length === 1
+                  profileImage?.length === 1
                     ? profileImage[0]?.url
                     : "https://fwiseb.online/storage/app/public/photos/X1hQX7splash-2048x2732.png1745340280"
                 }

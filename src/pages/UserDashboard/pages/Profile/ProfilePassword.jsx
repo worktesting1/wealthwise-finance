@@ -12,7 +12,7 @@ const ProfilePassword = ({ isOpen, onClose }) => {
   const [loading, setloading] = useState(false);
   const { baseUrl, userDetails } = useGlobalContext();
   const accessToken = JSON.parse(sessionStorage.getItem("userToken"));
-  const { _id } = JSON.parse(sessionStorage.getItem("user")) || userDetails;
+  const { _id } = JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const handleSubmit = (e) => {
     e.preventDefault();

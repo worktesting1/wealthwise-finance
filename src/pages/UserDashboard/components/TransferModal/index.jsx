@@ -36,7 +36,7 @@ function TransferModal({
   const totalBalance =
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
   const { _id, firstName, lastName, email } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 const kyced = true
   const {
     handleSubmit,

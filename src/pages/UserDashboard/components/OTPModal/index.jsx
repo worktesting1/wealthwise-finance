@@ -29,7 +29,7 @@ const OTPModal = ({ show, onClose, transferDetails, setShowSuccessModal }) => {
     thirdMessage,
     forthCode,
     forthMessage,
-  } = JSON.parse(sessionStorage.getItem("user")) || userDetails;
+  } = JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const handleSubmit = (e) => {
     e.preventDefault();

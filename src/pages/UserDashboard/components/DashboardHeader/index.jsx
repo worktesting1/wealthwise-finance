@@ -6,7 +6,7 @@ import { useGlobalContext } from "../../../../context/context";
 function DashboardHeader() {
   const { setIsMenuOpen, userDetails, getUser } = useGlobalContext();
   const { profileImage, _id } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const token = JSON.parse(sessionStorage.getItem("userToken"));
 
   useEffect(() => {

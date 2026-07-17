@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const { userDetails } = useGlobalContext();
   const { accountNum, firstName, profileImage, lastName, isKYC } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

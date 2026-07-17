@@ -34,7 +34,7 @@ function LoansContent() {
   } = useGlobalContext();
   const accessToken = JSON.parse(sessionStorage.getItem("userToken"));
   const { firstName, lastName, _id } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const handleSubmitApplication = (formData) => {
     if (isKYC === true) {

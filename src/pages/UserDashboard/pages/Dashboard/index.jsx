@@ -25,9 +25,6 @@ import Sidebar from "../../components/Sidbar";
 import StatsCards from "../../components/StatsCards";
 
 function Dashboard() {
-  const { _id } = JSON.parse(sessionStorage.getItem("user")) || userDetails;
-  const token = JSON.parse(sessionStorage.getItem("userToken"));
-
   const {
     getUser,
     userDetails,
@@ -37,6 +34,9 @@ function Dashboard() {
     getAllDeposits,
     getAllLoans,
   } = useGlobalContext();
+
+  const { _id } = JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
+  const token = JSON.parse(sessionStorage.getItem("userToken"));
 
   useEffect(() => {
     getUser(token, _id);
@@ -101,7 +101,7 @@ const DashboardOverView = () => {
 
   const { userDetails, formatNumber, totalAmount } = useGlobalContext();
   const { accountNum, firstName, profileImage } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const totalBalance =
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
   return (
@@ -109,7 +109,7 @@ const DashboardOverView = () => {
       <div className="overview_body_header">
         <div className="dashboard_profile">
           <img
-            src={profileImage.length === 1 ? profileImage[0]?.url : wealthwise}
+            src={profileImage?.length === 1 ? profileImage[0]?.url : wealthwise}
             alt="profile picture"
           />
         </div>

@@ -144,7 +144,7 @@ const menuItems = [
 const MobileMenu = ({ onClose }) => {
   const { userDetails, isKYC } = useGlobalContext();
   const { firstName, accountNum, lastName, profileImage } =
-    JSON.parse(sessionStorage.getItem("user")) || userDetails;
+    JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
