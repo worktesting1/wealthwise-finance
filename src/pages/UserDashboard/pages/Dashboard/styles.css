@@ -376,6 +376,9 @@
 
 .dashboard_logo_sect > img {
   width: 120px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .dashboard_profile {

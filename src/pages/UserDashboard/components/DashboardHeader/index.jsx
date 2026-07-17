@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { CiMenuFries } from "react-icons/ci";
-import logo from "../../../../assets/wealthwise.png";
+import logo from "../../../../assets/Logo-black.svg";
 import avatarFallback from "../../../../assets/mobilewealth.png";
 import { useGlobalContext } from "../../../../context/context";
 
