@@ -1,78 +1,114 @@
 import React from "react";
 import "../Footer/Footer.css";
 import logo from "../../assets/wealthwise.png";
-
-import { FaFacebookF, FaLinkedinIn, FaPinterestP } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaTelegramPlane } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
-import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 const Footer = () => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
 
   const handleNewsLetter = async (data) => {
     try {
+      // newsletter subscription handler
+      reset();
     } catch (error) {}
   };
+
   return (
-    <>
-      <footer className="footer flex" id="footer">
-        <div className="footer-item-one">
-          <img src={logo} alt="" />
-          <p>
-            Wealth Wise is a leading bank in the worldzone and a prominent
-            international banking institution
+    <footer className="footer" id="footer">
+      <div className="footer-inner">
+        {/* Brand */}
+        <div className="footer-brand">
+          <img src={logo} alt="Wealth Wise" />
+          <p className="footer-brand-tagline">
+            Wealth Wise is a leading digital banking institution serving over a
+            million customers worldwide with secure, fast, and reliable financial
+            services.
           </p>
-          <div className="footer-icons-con flex">
-            <div className="flex">
+          <div className="footer-socials">
+            <a className="footer-social-btn" href="#!" aria-label="Facebook">
               <FaFacebookF />
-            </div>
-            <div className="flex">
+            </a>
+            <a className="footer-social-btn" href="#!" aria-label="Twitter">
               <AiOutlineTwitter />
-            </div>
-            <div className="flex">
+            </a>
+            <a className="footer-social-btn" href="#!" aria-label="LinkedIn">
               <FaLinkedinIn />
-            </div>
-            <div className="flex">
-              <FaPinterestP />
-            </div>
+            </a>
+            <a
+              className="footer-social-btn"
+              href="https://t.me/Paymentmanagements"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Telegram"
+            >
+              <FaTelegramPlane />
+            </a>
           </div>
         </div>
-        <div className="footer-item-two">
-          <h3>Services</h3>
-          <p>Transfer Money</p>
-          <p>Savings Account</p>
-          <p>Received Money</p>
+
+        {/* Services */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">Services</h4>
+          <div className="footer-col-links">
+            <p>Transfer Money</p>
+            <p>Savings Account</p>
+            <p>Receive Money</p>
+            <p>Business Loans</p>
+            <p>Debit Cards</p>
+          </div>
         </div>
-        <div className="footer-item-two">
-          <h3>Help Center</h3>
-          <a href="mailto:wealthwise@cosultant.online">Customer Care</a>
-          <Link style={{ color: "white" }} to={"/contact"}>
-            Contact Us
-          </Link>
-          <p>wealthwise@cosultant.online</p>
+
+        {/* Help */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">Help Centre</h4>
+          <div className="footer-col-links">
+            <a href="mailto:wealthwise@cosultant.online">Customer Care</a>
+            <Link to="/contact">Contact Us</Link>
+            <Link to="/faq">FAQs</Link>
+            <Link to="/terms">Terms & Conditions</Link>
+            <Link to="/privacy">Privacy Policy</Link>
+          </div>
         </div>
-        <div className="footer-item-two">
-          <h3>Subscribe & Address</h3>
-          <p>
-            141, First Floor, 12 St Roots Terrace, Los Angeles United States
-            90010.
+
+        {/* Newsletter */}
+        <div className="footer-col">
+          <h4 className="footer-col-title">Stay Updated</h4>
+          <p className="footer-address">
+            141 First Floor, 12 St Roots Terrace,<br />
+            Los Angeles, United States 90010
           </p>
           <form
-            className="footer-newletter-form"
-            onSubmit={handleSubmit((data) => handleNewsLetter(data))}
+            className="footer-newsletter-form"
+            onSubmit={handleSubmit(handleNewsLetter)}
           >
             <input
               type="email"
-              placeholder="Your Email"
+              className="footer-newsletter-input"
+              placeholder="Your email address"
               {...register("email")}
             />
-            <Button title="Subscribe" />
+            <button type="submit" className="footer-newsletter-btn">
+              Subscribe
+            </button>
           </form>
         </div>
-      </footer>
-    </>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="footer-bottom">
+        <span className="footer-bottom-copy">
+          © {new Date().getFullYear()} Wealth Wise. All rights reserved.
+        </span>
+        <div className="footer-bottom-links">
+          <Link to="/terms">Terms</Link>
+          <Link to="/privacy">Privacy</Link>
+          <a href="mailto:wealthwise@cosultant.online">Legal</a>
+        </div>
+      </div>
+    </footer>
   );
 };
 

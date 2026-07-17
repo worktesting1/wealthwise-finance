@@ -47,12 +47,12 @@ function App() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 5000);
     } else if (pathname && loading === false) {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 5000);
     }
   }, [pathname]);
 
