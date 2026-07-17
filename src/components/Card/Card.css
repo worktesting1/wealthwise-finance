@@ -1,50 +1,102 @@
 .card-container {
-    padding: 100px 80px;
+    padding: 80px 80px;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
 }
 
 .card {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     background-color: #fff;
-    -webkit-box-shadow: 0 0 25px rgba(85, 85, 85, .1);
-    box-shadow: 0 0 25px rgba(85, 85, 85, .1);
-    padding: 25px;
-    border-radius: 5px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
+    padding: 32px 28px;
+    border-radius: 14px;
     width: 33.3%;
+    border-top: 4px solid #2563eb;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    position: relative;
+    overflow: hidden;
 }
 
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #eff6ff 0%, #fff 60%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    z-index: 0;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(37, 99, 235, 0.14);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card > * {
+    position: relative;
+    z-index: 1;
+}
 
 .card h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    line-height: 1.5;
+    line-height: 1.4;
+    color: #0f172a;
 }
 
 .card p {
     text-align: start;
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.7;
 }
 
 .card-header {
-    gap: 30px;
+    gap: 20px;
+    align-items: center;
 }
 
 .card-image-con {
-    width: 65px;
-    height: 65px;
-    border: 1px solid rgba(0, 169, 164, .6);
-    border-radius: 7px;
+    width: 60px;
+    height: 60px;
+    background: #eff6ff;
+    border: 2px solid #bfdbfe;
+    border-radius: 12px;
     justify-content: center;
+    flex-shrink: 0;
+    transition: background 220ms ease, border-color 220ms ease;
 }
 
-@media(max-width:500px) {
+.card:hover .card-image-con {
+    background: #dbeafe;
+    border-color: #93c5fd;
+}
+
+.card-image-con img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+@media(max-width: 900px) {
+    .card-container {
+        padding: 60px 32px;
+    }
+}
+
+@media(max-width: 500px) {
     .card-container {
         flex-direction: column;
+        padding: 48px 20px;
     }
 
-    .card-container>div {
+    .card-container > div {
         width: 100%;
     }
 }
