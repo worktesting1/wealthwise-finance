@@ -23,7 +23,7 @@ function DashboardHeader() {
         />
       </div>
       <div className="dashboard_logo_sect">
-        <img src={logo} alt="Wealth Wise Logo" />
+        <img src={wealthwise} alt="Wealth Wise Logo" />
         <div className="dashboard_profile">
           <img
             src={profileImage?.length === 1 ? profileImage[0]?.url : wealthwise}
