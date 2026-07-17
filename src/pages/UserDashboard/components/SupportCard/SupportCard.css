@@ -96,9 +96,5 @@
   stroke-linejoin: round;
 }
 
-/* Mobile: add margin at the bottom */
-@media (max-width: 767px) {
-  .help-card-container {
-    margin: 12px 16px 0;
-  }
-}
+/* Let the Dashboard wrapper handle all positioning —
+   the card itself never sets its own margin. */

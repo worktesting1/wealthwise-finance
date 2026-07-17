@@ -45,6 +45,8 @@
   padding: 0;
   background: transparent;
   box-shadow: none;
+  /* push the card away from the bottom nav */
+  margin-bottom: 16px;
 }
 
 /* ─────────────────────────────────────────────
