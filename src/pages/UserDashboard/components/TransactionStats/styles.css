@@ -1,85 +1,63 @@
-/* Container styles */
+/* ═══════════════════════════════════════════
+   TRANSACTION STATS (sidebar widget)
+   ═══════════════════════════════════════════ */
+
 .stats-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-top: 1rem;
+  gap: 12px;
+  padding-top: 12px;
 }
 
-/* Card styles */
 .stat-card {
   display: flex;
   align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-/* Icon container styles */
+.stat-card:last-child { border-bottom: none; }
+
 .icon-container {
-  width: 2.7rem;
-  height: 2.7rem;
-  border-radius: 50% !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1rem !important;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
 
-.icon-container.primary {
-  background-color: #e0f2fe;
-}
+.icon-container.primary { background: #dbeafe; }
+.icon-container.yellow  { background: #fef9c3; }
+.icon-container.green   { background: #dcfce7; }
+.icon-container.purple  { background: #ede9fe; }
 
-.icon-container.yellow {
-  background-color: #fef9c3;
-}
-
-.icon-container.green {
-  background-color: #dcfce7;
-}
-
-.icon-container.purple {
-  background-color: #f3e8ff;
-}
-
-/* Icon styles */
 .icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 18px; height: 18px;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.icon.gray {
-  color: #4b5563;
-}
+.icon.gray   { color: #2563eb; }
+.icon.yellow { color: #ca8a04; }
+.icon.green  { color: #16a34a; }
+.icon.purple { color: #7c3aed; }
 
-.icon.yellow {
-  color: #ca8a04;
-}
-
-.icon.green {
-  color: #16a34a;
-}
-
-.icon.purple {
-  color: #9333ea;
-}
-
-/* Content styles */
-.stat-content {
-  flex: 1;
-  min-width: 0;
-}
+.stat-content { flex: 1; min-width: 0; }
 
 .stat-title {
-  font-size: 0.8rem;
-  color: #6b7280;
-  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 3px;
 }
 
 .stat-value {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;

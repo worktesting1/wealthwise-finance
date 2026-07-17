@@ -1,109 +1,104 @@
-/* Main card container */
+/* ═══════════════════════════════════════════
+   SUPPORT CARD
+   ═══════════════════════════════════════════ */
+
 .help-card-container {
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0f2fe 100%);
-  border-radius: 12px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  border: 1px solid #bfdbfe;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  border-radius: 16px;
   overflow: hidden;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
   font-family: "Poppins", sans-serif;
-  margin-bottom: 100px;
+  position: relative;
 }
 
-/* Card content area */
+.help-card-container::before {
+  content: "";
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 100px; height: 100px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+
 .help-card-content {
   padding: 24px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* Icon wrapper */
 .help-card-icon-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
-/* White circle for icon */
 .help-card-icon-circle {
-  width: 64px;
-  height: 64px;
+  width: 54px; height: 54px;
   border-radius: 50%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
 }
 
-/* Help icon styling */
 .help-card-icon {
-  width: 40px;
-  height: 40px;
+  width: 26px; height: 26px;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  color: #0284c7;
+  color: #93c5fd;
 }
 
-/* Title text */
 .help-card-title {
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 500;
-  color: #111827;
-  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 6px;
 }
 
-/* Description text */
 .help-card-description {
-  font-size: 14px;
-  line-height: 20px;
-  color: #4b5563;
-  margin-bottom: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 18px;
+  line-height: 1.6;
 }
 
-/* Button wrapper */
 .help-card-button-wrapper {
   display: flex;
   justify-content: center;
 }
 
-/* Support button */
 .help-card-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
+  gap: 6px;
+  padding: 9px 20px;
+  background: #2563eb;
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  font-size: 14px;
-  font-weight: 500;
-  color: white;
-  background-color: #0284c7;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
   font-family: "Poppins", sans-serif;
+  transition: background 150ms, transform 150ms;
 }
 
 .help-card-button:hover {
-  background-color: #0369a1;
+  background: #1d4ed8;
   transform: translateY(-1px);
 }
 
-/* Message icon in button */
 .help-card-message-icon {
-  width: 16px;
-  height: 16px;
+  width: 14px; height: 14px;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  margin-right: 8px;
 }
 
-@media (min-width: 601px) {
+/* Mobile: add margin at the bottom */
+@media (max-width: 767px) {
   .help-card-container {
-    margin-top: 20px;
+    margin: 12px 16px 0;
   }
 }

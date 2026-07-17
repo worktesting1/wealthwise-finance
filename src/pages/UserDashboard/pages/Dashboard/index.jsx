@@ -8,15 +8,14 @@ import Clock from "../../components/Clock";
 import CurrentDate from "../../components/CurrentDate";
 import Greetings from "../../components/Greetings";
 import "./styles.css";
+
 // Icons
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
-import { MdHistory } from "react-icons/md";
+import { MdHistory, MdVisibility } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { FaCircle } from "react-icons/fa";
-import { AiOutlineMenu } from "react-icons/ai";
-import { MdVisibility } from "react-icons/md";
 
 // Images
 import wealthwise from "../../../../assets/mobilewealth.png";
@@ -49,54 +48,55 @@ function Dashboard() {
 
   return (
     <>
+      {/* ── MOBILE LAYOUT ── */}
       <div className="bank_dashbaord">
-        <div className="dashboard_body">
-          {/* Dashboard OverView */}
+        <div className="dash-mobile-body">
           <DashboardOverView />
-        </div>
-        <div className="dashboard_what_wrapper">
-          {/* What you would like section */}
           <DashboardWhatSect />
-        </div>
-        <div className="dashboard_transactions_wrapper">
-          {/* Transaction Sect */}
-          <DashboardTransactionSect />
-        </div>
-        <div className="dashboard_transactions_stats">
-          <div className="dashboard_what_sect">
-            <h3>Account Statistics</h3>
+          <div className="dash-mobile-section">
+            <DashboardTransactionSect />
+          </div>
+          <div className="dash-mobile-section">
+            <div className="dash-section-title">Account Statistics</div>
             <TransactionStats />
           </div>
-        </div>
-        <div className="dashobard_support_section">
-          <SupportCard />
+          <div className="dash-mobile-section dash-mobile-support">
+            <SupportCard />
+          </div>
         </div>
       </div>
+
+      {/* ── DESKTOP LAYOUT ── */}
       <div className="bank_desktop_dashboard">
         <Sidebar />
         <div className="bank_desktop_dashboard_body">
           <DesktopHeader />
-          <StatsCards />
-          <div className="bank_desktop_dashboard_asides">
-            <div className="bank_desktop_dashboard_inner_side">
-              <DashboardOverView />
-              <DashboardWhatSect />
-            </div>
-            <div className="bank_desktop_dashboard_aside">
-              <TransactionStats />
-              <SupportCard />
+          <div className="desktop-dashboard-scroll">
+            <StatsCards />
+            <div className="desktop-main-grid">
+              <div className="desktop-main-left">
+                <DashboardOverView />
+                <DashboardWhatSect />
+                <DashboardTransactionSect />
+              </div>
+              <div className="desktop-main-right">
+                <div className="desktop-right-card">
+                  <p className="desktop-right-title">Account Statistics</p>
+                  <TransactionStats />
+                </div>
+                <SupportCard />
+              </div>
             </div>
           </div>
-          <DashboardTransactionSect />
         </div>
       </div>
     </>
   );
 }
 
+/* ── Balance Overview ── */
 const DashboardOverView = () => {
   const [visible, setVisible] = useState(false);
-  const toggleVisible = () => setVisible(!visible);
   const navigate = useNavigate();
 
   const { userDetails, formatNumber, totalAmount } = useGlobalContext();
@@ -104,64 +104,66 @@ const DashboardOverView = () => {
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const totalBalance =
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
+
   return (
-    <div className="overview_sect">
-      <div className="overview_body_header">
-        <div className="dashboard_profile">
+    <div className="overview-card">
+      {/* Card top row */}
+      <div className="overview-top-row">
+        <div className="overview-profile-wrap">
           <img
+            className="overview-avatar"
             src={profileImage?.length === 1 ? profileImage[0]?.url : wealthwise}
-            alt="profile picture"
+            alt="profile"
           />
-        </div>
-        <div className="overview_header_item_one">
-          <div className="dashboard_profile_name_sect">
+          <div>
             <Greetings />
-            <Clock />
-          </div>
-          <div className="overview_body_timer_sect">
-            <h3 className="medium_tiny_text">{firstName}</h3>
-            <CurrentDate />
+            <p className="overview-name">{firstName}</p>
           </div>
         </div>
-      </div>
-      <div className="dashboard_available_balance_sect">
-        <div className="dashboard_available_balance_sect_text_sect">
-          <h3 className="medium_tiny_text">Available Balance</h3>
-          {!visible ? (
-            <AiOutlineEyeInvisible
-              size={22}
-              color="white"
-              onClick={toggleVisible}
-            />
-          ) : (
-            <MdVisibility size={22} color="white" onClick={toggleVisible} />
-          )}
+        <div className="overview-date-wrap">
+          <CurrentDate />
+          <Clock />
         </div>
-        {!visible ? (
-          <h3 className="medium_tiny_text">
-            ${formatNumber(totalBalance)} USD
-          </h3>
-        ) : (
-          <h1>....</h1>
-        )}
       </div>
-      <div className="dashboard_account_sect">
-        <div className="dashboard_account_number_sect">
-          <button>
-            <FaCircle size={6} />
-            <span>Active</span>
+
+      {/* Balance */}
+      <div className="overview-balance-section">
+        <div className="overview-balance-label-row">
+          <span className="overview-balance-label">Available Balance</span>
+          <button className="overview-eye-btn" onClick={() => setVisible(!visible)}>
+            {visible
+              ? <MdVisibility size={20} color="rgba(255,255,255,0.8)" />
+              : <AiOutlineEyeInvisible size={20} color="rgba(255,255,255,0.8)" />
+            }
           </button>
-          <h3 className="medium_tiny_text">Account Number</h3>
-          <h3 className="account_num_text">{accountNum}</h3>
         </div>
-        <div className="dashboard_top_up_sect">
+        {visible
+          ? <p className="overview-balance-hidden">••••••</p>
+          : <p className="overview-balance-amount">${formatNumber(totalBalance)} <span className="overview-currency">USD</span></p>
+        }
+      </div>
+
+      {/* Account strip */}
+      <div className="overview-account-strip">
+        <div className="overview-account-info">
+          <div className="overview-status-badge">
+            <FaCircle size={6} color="#4ade80" />
+            <span>Active</span>
+          </div>
+          <p className="overview-account-label">Account Number</p>
+          <p className="overview-account-num">{accountNum}</p>
+        </div>
+        <div className="overview-account-actions">
           <button
+            className="overview-btn-white"
             onClick={() => navigate("/dashboard/accountHistory")}
-            className="dashboard_top_up_sect_trans_btn"
           >
             Transactions
           </button>
-          <button onClick={() => navigate("/dashboard/transfer")}>
+          <button
+            className="overview-btn-ghost"
+            onClick={() => navigate("/dashboard/transfer")}
+          >
             Withdraw
           </button>
         </div>
@@ -170,62 +172,43 @@ const DashboardOverView = () => {
   );
 };
 
-const DashboardWhatSect = () => {
-  return (
-    <div className="dashboard_what_sect">
-      <h3>What would you like to do today?</h3>
-      <p className="tiny_text">Choose from our popular actions below</p>
-      <div className="user_info_sect">
-        <Link
-          to="/dashboard/account-settings"
-          className="user_info_items user_info_info"
-        >
-          <CiUser size={28} />
-          <h3 className="medium_tiny_text">Account Info</h3>
-        </Link>
-        <Link
-          to="/dashboard/transfer"
-          className="user_info_items user_info_send"
-        >
-          <FiSend size={25} />
-          <h3 className="medium_tiny_text">Send Money</h3>
-        </Link>
-        <Link to="/dashboard/loans" className="user_info_items user_info_loans">
-          <IoMdAdd size={28} />
-          <h3 className="medium_tiny_text">Loans</h3>
-        </Link>
-        <Link
-          to="/dashboard/accountHistory"
-          className="user_info_items user_info_history"
-        >
-          <MdHistory size={28} />
-          <h3 className="medium_tiny_text">History</h3>
-        </Link>
-      </div>
-    </div>
-  );
-};
+/* ── Quick Actions ── */
+const actions = [
+  { to: "/dashboard/account-settings", icon: <CiUser size={24} />, label: "Account", color: "action-slate" },
+  { to: "/dashboard/transfer",         icon: <FiSend size={22} />,  label: "Send",    color: "action-blue" },
+  { to: "/dashboard/loans",            icon: <IoMdAdd size={24} />, label: "Loans",   color: "action-green" },
+  { to: "/dashboard/accountHistory",   icon: <MdHistory size={22} />, label: "History", color: "action-purple" },
+];
 
+const DashboardWhatSect = () => (
+  <div className="quick-actions-card">
+    <p className="quick-actions-title">Quick Actions</p>
+    <div className="quick-actions-row">
+      {actions.map((a) => (
+        <Link key={a.to} to={a.to} className="quick-action-item">
+          <div className={`quick-action-icon ${a.color}`}>{a.icon}</div>
+          <span className="quick-action-label">{a.label}</span>
+        </Link>
+      ))}
+    </div>
+  </div>
+);
+
+/* ── Recent Transactions ── */
 const DashboardTransactionSect = () => {
   const { depositHistory, userWithdrawals, loanHistory } = useGlobalContext();
   const transactions = [...loanHistory, ...userWithdrawals, ...depositHistory];
-
-  // Sort by createdAt descending (most recent first)
   transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   return (
-    <div className="dashboard_what_sect dashboard_transactions_sect">
-      <div className="dashboard_card_header_sect">
-        <div>
-          <AiOutlineMenu size={22} />
-          <p className="tiny_text">Recent Transactions</p>
-        </div>
-        <Link to="/dashboard/accountHistory" className="tiny_text">
-          View All
+    <div className="transactions-card">
+      <div className="transactions-card-header">
+        <p className="transactions-card-title">Recent Transactions</p>
+        <Link to="/dashboard/accountHistory" className="transactions-view-all">
+          View all →
         </Link>
       </div>
-      <div className="dashboard_transactions">
-        <TransactionTable transactions={transactions.slice(0, 3)} />
-      </div>
+      <TransactionTable transactions={transactions.slice(0, 5)} />
     </div>
   );
 };

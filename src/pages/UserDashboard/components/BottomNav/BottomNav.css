@@ -1,106 +1,94 @@
+/* ═══════════════════════════════════════════
+   BOTTOM NAV — Mobile only
+   ═══════════════════════════════════════════ */
+
 @media (min-width: 601px) {
-  .bottom-nav-content {
-    display: none !important;
-  }
+  .bottom-nav-container { display: none !important; }
 }
 
 @media (max-width: 600px) {
-  /* Main container */
   .bottom-nav-container {
-    display: block !important;
-    background-color: white;
-    border-top: 1px solid #e5e7eb;
-    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
-    border-radius: 24px 24px 0 0;
-    margin: 0 8px 4px 8px;
+    display: block;
+    background: #fff;
+    border-top: 1px solid #f1f5f9;
+    box-shadow: 0 -4px 20px rgba(15,23,42,0.08);
+    border-radius: 20px 20px 0 0;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
+    bottom: 0; left: 0; right: 0;
+    z-index: 500;
   }
 
-  /* Navigation content */
   .bottom-nav-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 10px 28px 14px;
     position: relative;
   }
 
-  /* Navigation items */
   .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    z-index: 10;
+    gap: 4px;
   }
 
-  /* Navigation icons */
   .nav-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
   }
 
   .nav-svg {
-    width: 20px;
-    height: 20px;
+    width: 22px; height: 22px;
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    color: #6b7280;
+    color: #94a3b8;
+    transition: color 150ms;
   }
 
-  .nav-svg.active {
-    color: #2563eb;
-  }
+  .nav-svg.active { color: #2563eb; }
 
-  /* Navigation labels */
   .nav-label {
-    font-size: 12px;
-    font-weight: 500;
-    margin-top: 4px;
-    color: #6b7280;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+    transition: color 150ms;
   }
 
-  .nav-label.active {
-    color: #2563eb;
-  }
+  .nav-label.active { color: #2563eb; }
 
-  /* Floating action button */
+  /* Floating center button */
   .floating-button-container {
     position: absolute;
     left: 50%;
     top: 0;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -46%);
   }
 
   .floating-button {
-    background: linear-gradient(to right, #2563eb, #1e40af);
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    border: 4px solid white;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+    border: 3px solid #fff;
     cursor: pointer;
+    transition: transform 150ms, box-shadow 150ms;
+  }
+
+  .floating-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(37,99,235,0.45);
   }
 
   .floating-icon {
-    width: 32px;
-    height: 32px;
+    width: 24px; height: 24px;
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    color: white;
+    color: #fff;
   }
 }

@@ -1,125 +1,78 @@
-/* Stats cards container */
+/* ═══════════════════════════════════════════
+   STATS CARDS ROW
+   ═══════════════════════════════════════════ */
+
 .stats-cards-container {
   display: none;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  margin-top: 80px;
-  font-family: "Poppins" sans-serif;
+  gap: 14px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Individual card styling */
+@media (min-width: 768px) {
+  .stats-cards-container { display: grid; }
+}
+
 .stats-card {
-  border-radius: 0.75rem;
-  padding: 1rem;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+  border: 1px solid #f1f5f9;
+  border-left: 4px solid;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-/* Balance card */
-.balance-card {
-  background: linear-gradient(to right, #eff6ff, #ffffff);
-  border-color: #bfdbfe;
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15,23,42,0.09);
 }
 
-/* Income card */
-.income-card {
-  background: linear-gradient(to right, #f0fdf4, #ffffff);
-  border-color: #bbf7d0;
-}
+.balance-card  { border-left-color: #2563eb; }
+.income-card   { border-left-color: #16a34a; }
+.outgoing-card { border-left-color: #dc2626; }
+.limit-card    { border-left-color: #7c3aed; }
 
-/* Outgoing card */
-.outgoing-card {
-  background: linear-gradient(to right, #fef2f2, #ffffff);
-  border-color: #fecaca;
-}
-
-/* Limit card */
-.limit-card {
-  background: linear-gradient(to right, #f5f3ff, #ffffff);
-  border-color: #ddd6fe;
-}
-
-/* Stats label */
 .stats-label {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: #6b7280;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 5px;
 }
 
-/* Stats value */
 .stats-value {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 700;
-  color: #1f2937;
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
 }
 
-.income-value {
-  color: #166534;
-}
+.income-value   { color: #15803d; }
+.outgoing-value { color: #b91c1c; }
+.limit-value    { color: #6d28d9; }
 
-.outgoing-value {
-  color: #991b1b;
-}
-
-.limit-value {
-  color: #6b21a8;
-}
-
-/* Icon container */
+/* Icon */
 .stats-icon-container {
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
 
-.balance-card .stats-icon-container {
-  background-color: #bfdbfe;
-}
+.balance-card  .stats-icon-container { background: #dbeafe; }
+.income-card   .stats-icon-container { background: #dcfce7; }
+.outgoing-card .stats-icon-container { background: #fee2e2; }
+.limit-card    .stats-icon-container { background: #ede9fe; }
 
-.income-icon-container {
-  background-color: #bbf7d0;
-}
+.stats-icon { height: 20px; width: 20px; }
 
-.outgoing-icon-container {
-  background-color: #fecaca;
-}
-
-.limit-icon-container {
-  background-color: #ddd6fe;
-}
-
-/* Icon styling */
-.stats-icon {
-  height: 1.25rem;
-  width: 1.25rem;
-}
-
-.balance-card .stats-icon {
-  color: #1f2937;
-}
-
-.income-card .stats-icon {
-  color: #166534;
-}
-
-.outgoing-card .stats-icon {
-  color: #991b1b;
-}
-
-.limit-card .stats-icon {
-  color: #6b21a8;
-}
-
-/* Responsive styles */
-@media (min-width: 1024px) {
-  .stats-cards-container {
-    display: grid;
-  }
-}
+.balance-card  .stats-icon { color: #2563eb; }
+.income-card   .stats-icon { color: #16a34a; }
+.outgoing-card .stats-icon { color: #dc2626; }
+.limit-card    .stats-icon { color: #7c3aed; }
