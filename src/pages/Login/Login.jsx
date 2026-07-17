@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import mac from "../../assets/mac.png";
-import { Loader, Purple } from "../../components";
+import logo from "../../assets/wealthwise.png";
+import { Loader } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { useGlobalContext } from "../../context/context";
-import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -18,115 +19,125 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const [loginLoading, setLoginLoading] = useState(false);
-  const [checked, setChecked] = useState(true);
   const { baseUrl, setHeaderNav, loading } = useGlobalContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm({ resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
 
   const handleLoginForm = async (data) => {
-    if (checked) {
-      setLoginLoading(true);
-      try {
-        const response = await axios.post(`${baseUrl}/api/auth/login`, data);
-
-        if (response.status === 200) {
-          setLoginLoading(false);
-
-          sessionStorage.setItem("user", JSON.stringify(response.data));
-          sessionStorage.setItem(
-            "userToken",
-            JSON.stringify(response.data.accessToken)
-          );
-          toast.success("User Login Verified");
-          setTimeout(() => {
-            navigate("/dashboard");
-          }, 2000);
-        }
-      } catch (error) {
+    setLoginLoading(true);
+    try {
+      const response = await axios.post(`${baseUrl}/api/auth/login`, data);
+      if (response.status === 200) {
         setLoginLoading(false);
-        if (error.response.data === "Wrong credentials") {
-          toast.error("Wrong credentials");
-        }
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+        sessionStorage.setItem(
+          "userToken",
+          JSON.stringify(response.data.accessToken)
+        );
+        toast.success("Login successful!");
+        setTimeout(() => navigate("/dashboard"), 2000);
       }
-    } else {
-      toast.error("Please Verify if you are not a Robot");
+    } catch (error) {
+      setLoginLoading(false);
+      if (error?.response?.data === "Wrong credentials") {
+        toast.error("Wrong email or password.");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
     }
   };
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <section className="login flex">
-      <div className="login-image-container">
-        <img src={mac} alt="mac" />
-        <h1 className="sub-header-text">All in One Transfer Solution</h1>
-        <p className="sub-p">
-          Transfer Funds Across All Country in Minutes and Our Transfer is
-          instant
-        </p>
-      </div>
-      <div className="login-form-container">
-        <h1 className="sub-header-text diff">Login Account</h1>
-        <p className="sub-p">
-          Fill the form below to login to your Wealth Wise account.
-        </p>
+  if (loading) return <Loader />;
 
-        {/*User Login Form */}
-
-        <form
-          className="login-form"
-          onSubmit={handleSubmit((data) => handleLoginForm(data))}
-        >
-          <div>
-            <h3>Email</h3>
-            <input
-              type="email"
-              placeholder="Your Email"
-              {...register("email", { required: true })}
-            />
-            <p className="error">{errors.email?.message}</p>
+  return (
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
+      <section className="login-page">
+        {/* Left decorative panel */}
+        <div className="login-left-panel">
+          <div className="login-panel-content">
+            <img src={logo} alt="Wealth Wise" className="login-panel-logo" />
+            <img src={mac} alt="Banking" className="login-panel-image" />
+            <h2 className="login-panel-title">All-in-One Transfer Solution</h2>
+            <p className="login-panel-sub">
+              Transfer funds across every country in minutes.<br />
+              Fast, secure, and always on time.
+            </p>
           </div>
-          <div>
-            <h3>Password</h3>
-            <input
-              type="password"
-              placeholder="Your Password"
-              {...register("password", { required: true })}
-            />
-            <p className="error">{errors.password?.message}</p>
+        </div>
+
+        {/* Right form panel */}
+        <div className="login-right-panel">
+          <div className="login-form-header">
+            <span className="login-form-eyebrow">Welcome back</span>
+            <h1 className="login-form-title">Sign in to your account</h1>
+            <p className="login-form-subtitle">
+              Enter your credentials to access your Wealth Wise dashboard.
+            </p>
           </div>
 
-          <Purple title={loginLoading ? "loading..." : "Login"} />
-          <p className="sub-p dont">
-            Don't have an Account?
-            <span
-              onClick={() => {
-                setHeaderNav(false);
-                navigate("/register");
-              }}
+          <form onSubmit={handleSubmit(handleLoginForm)}>
+            <div className="login-field">
+              <label htmlFor="email">Email address</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                {...register("email", { required: true })}
+              />
+              {errors.email && (
+                <p className="field-error">{errors.email.message}</p>
+              )}
+            </div>
+
+            <div className="login-field">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Your password"
+                {...register("password", { required: true })}
+              />
+              {errors.password && (
+                <p className="field-error">{errors.password.message}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="login-submit-btn"
+              disabled={loginLoading}
             >
-              Sign up
-            </span>
-          </p>
-          <p className="sub-p dont forget_pass">
-            <span
-              onClick={() => {
-                navigate("/forget-password");
-              }}
-            >
-              Forget Password?
-            </span>
-          </p>
-        </form>
-      </div>
-    </section>
+              {loginLoading ? "Signing in…" : "Sign In"}
+            </button>
+
+            <div className="login-footer-links">
+              <p className="login-footer-text">
+                Don't have an account?{" "}
+                <span
+                  onClick={() => {
+                    setHeaderNav(false);
+                    navigate("/register");
+                  }}
+                >
+                  Create one
+                </span>
+              </p>
+              <p className="login-footer-text">
+                <span onClick={() => navigate("/forget-password")}>
+                  Forgot your password?
+                </span>
+              </p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </>
   );
 };
 

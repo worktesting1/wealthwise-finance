@@ -1,100 +1,71 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../Header/Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 import { useGlobalContext } from "../../context/context";
 import logo from "../../assets/wealthwise.png";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const Header = () => {
   const { headerNav, setHeaderNav, toggleNave } = useGlobalContext();
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
   const [dash, setDash] = useState(false);
 
-  const listenScrollEvent = () => {
-    if (window.scrollY < 700) {
-      return setDash(false);
-    } else if (window.scrollY > 700) {
-      return setDash(true);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener("scroll", listenScrollEvent);
-    return () => window.removeEventListener("scroll", listenScrollEvent);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+      setDash(window.scrollY > 700);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeNav = () => setHeaderNav(false);
+
   return (
-    <header className="header flex">
+    <header className={`header flex ${scrolled ? "scrolled" : ""}`}>
       <div className="header-logo-container">
-        <Link to={"/"}>
-          <img src={logo} alt="" />
+        <Link to={"/"} onClick={closeNav}>
+          <img src={logo} alt="Wealth Wise" />
         </Link>
       </div>
-      <ul
-        className={`flex ${
-          headerNav === true ? "open-nav" : dash === false ? "relative" : ""
-        }`}
-      >
+
+      <ul className={headerNav ? "open-nav" : ""}>
         <AiOutlineClose
+          className="close-icon"
           id="header_nav"
           onClick={toggleNave}
-          style={{ fontSize: "30px", color: "white" }}
         />
-        <Link
-          onClick={() => {
-            setHeaderNav(false);
-          }}
-          to={"/"}
-        >
-          Home
-        </Link>
-        <Link
-          onClick={() => {
-            setHeaderNav(false);
-          }}
-          to={"/about"}
-        >
-          About
-        </Link>
-        <Link
-          onClick={() => {
-            setHeaderNav(false);
-          }}
-          to={"/faq"}
-        >
-          FAQs
-        </Link>
-        <Link
-          onClick={() => {
-            setHeaderNav(false);
-          }}
-          to={"/contact"}
-        >
-          Contact
-        </Link>
+        <li>
+          <Link to={"/"} onClick={closeNav}>Home</Link>
+        </li>
+        <li>
+          <Link to={"/about"} onClick={closeNav}>About</Link>
+        </li>
+        <li>
+          <Link to={"/faq"} onClick={closeNav}>FAQs</Link>
+        </li>
+        <li>
+          <Link to={"/contact"} onClick={closeNav}>Contact</Link>
+        </li>
         <button
-          onClick={() => {
-            navigate("/login");
-          }}
-          className="purple-btn"
+          className="header-login-btn"
+          onClick={() => { closeNav(); navigate("/login"); }}
         >
           Login
         </button>
         <button
-          onClick={() => {
-            navigate("/dashboard");
-          }}
-          className={`purple-btn ${dash === false ? "dash_btn" : ""}`}
+          className={`header-dashboard-btn ${!dash ? "hidden" : ""}`}
+          onClick={() => { closeNav(); navigate("/dashboard"); }}
         >
           Dashboard
         </button>
       </ul>
+
       <RxHamburgerMenu
+        className="hamburger-icon"
         id="header_nav"
-        style={{ fontSize: "30px" }}
         onClick={toggleNave}
       />
     </header>

@@ -1,47 +1,45 @@
-import React, { useEffect } from "react";
-import { Contact, Footer, Header, Card, Loader, Hero } from "../../components";
-
-import { RiLuggageDepositLine } from "react-icons/ri";
-
+import React from "react";
+import { Footer, Header, Card, Loader, Contact } from "../../components";
 import { HashLink } from "react-router-hash-link";
 import { BsArrowRight } from "react-icons/bs";
+import { MdAccountBalance, MdOutlinePayment } from "react-icons/md";
+import { TbSend } from "react-icons/tb";
+import { RiLuggageDepositLine } from "react-icons/ri";
+import { useGlobalContext } from "../../context/context";
+import { useNavigate } from "react-router-dom";
+
 import payment from "../../assets/payments.png";
 import commercial from "../../assets/commercial.png";
 import invest from "../../assets/invest.png";
 import loan from "../../assets/loan.png";
 import onlineBanking from "../../assets/online-banking.png";
 import manage from "../../assets/manage.png";
-
-import "../Home/Home.css";
 import transacLogo from "../../assets/3.png";
-import briefLogo from "../../assets/scrn-1.png";
 import transacLogo2 from "../../assets/back.png";
 import transacLogo3 from "../../assets/online-payment.png";
+import briefLogo from "../../assets/scrn-1.png";
 import cardLogo1 from "../../assets/feature-icon-1.png";
 import cardLogo2 from "../../assets/feature-icon-2.png";
 import cardLogo3 from "../../assets/feature-icon-3.png";
 
-import { MdAccountBalance, MdOutlinePayment } from "react-icons/md";
-import { useGlobalContext } from "../../context/context";
-import { useNavigate } from "react-router-dom";
-import { TbSend } from "react-icons/tb";
+import "./Home.css";
 
-let cardDetails = [
+const cardDetails = [
   {
     title: "Fully Secure Payment",
-    para: "Secure payment option on our platform",
+    para: "Every transaction is protected with bank-grade encryption.",
     image: cardLogo1,
     id: "1",
   },
   {
-    title: "No Transition Charge",
-    para: "Fund transfer is without hidden charges.",
+    title: "No Hidden Charges",
+    para: "Fund transfers are completely free of hidden fees.",
     image: cardLogo2,
     id: "2",
   },
   {
-    title: "Cashout In A Minute",
-    para: "Withdrawal of fund at our local branches and ATM across the country is instant without delay.",
+    title: "Instant Cashout",
+    para: "Withdraw funds at our branches and ATMs instantly, nationwide.",
     image: cardLogo3,
     id: "3",
   },
@@ -51,286 +49,279 @@ const Home = () => {
   const navigate = useNavigate();
   const { loading } = useGlobalContext();
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <section className="home">
+  if (loading) return <Loader />;
+
+  return (
+    <div className="home">
       <Header />
-      <Hero />
-      <section className="why why_first">
-        <section className="transaction-sect">
-          <div className="transaction-image-container" data-aos="zoom-in">
-            <div>
-              <img src={transacLogo} alt="" />
-            </div>
-          </div>
-          <div data-aos="zoom-out">
-            <p className="sub-header-p">ON TIME, EVERY TIME</p>
-            <h1 className="sub-header-text">
-              Get World Class & Fastest Online Payment Service
-            </h1>
-            <p className="sub-p">
-              Our local and international money transfer is the very best you
-              can imagine as we have provided the very best avenue for you to
-              transfer fund accros countries in minutes and our fund transfer is
-              instantly
-            </p>
-            <p className="sub-p">
-              With over a million customer, we have stood the test of time and
-              our customers base speaks the volume about us.
-            </p>
-            <button
-              className="purple-btn"
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Transfer Funds
+
+      {/* ── HERO ── */}
+      <section className="home-hero">
+        <div className="home-hero-content">
+          <span className="home-hero-eyebrow">Trusted by 1M+ customers</span>
+          <h1 className="home-hero-title">
+            Banking That <span>Works</span> For You
+          </h1>
+          <p className="home-hero-sub">
+            Send money across the globe in minutes, manage your wealth in one
+            place, and experience the security of a modern digital bank.
+          </p>
+          <div className="home-hero-actions">
+            <button className="btn-primary" onClick={() => navigate("/register")}>
+              Open an Account
+            </button>
+            <button className="btn-outline-white" onClick={() => navigate("/login")}>
+              Sign In
             </button>
           </div>
-        </section>
+        </div>
+        <div className="home-hero-visual">
+          <img src={transacLogo} alt="Online Banking" />
+        </div>
       </section>
-      <section className="part-two">
-        <section className="transaction-sect">
-          <div data-aos="fade-up-right">
-            <p className="sub-header-p">DO MORE YOUR WAY</p>
-            <h1 className="sub-header-text">Why We Stand Out</h1>
-            <p className="sub-p">
-              With over years of investment experience and $1.7 trillion in
-              assets under management Footnote, access the world-class
-              investment expertise of Wealth Wise to help you meet your
-              important financial goals.
-            </p>
-            <p className="sub-p">
-              We ensure you exprerience the very best of internet banking ever
-              provided by any financial institution.
-            </p>
-            <HashLink
-              smooth
-              to={"#footer"}
-              id="hashlink"
-              className="purple-btn"
-            >
-              Find A Location
-            </HashLink>
-          </div>
-          <div className="transaction-image-container" data-aos="zoom-in">
-            <div id="transaction-image-container">
-              <img src={transacLogo2} alt="" />
-            </div>
-          </div>
-        </section>
+
+      {/* ── STATS ── */}
+      <div className="home-stats">
+        <div className="home-stat-item">
+          <div className="home-stat-number">1M+</div>
+          <div className="home-stat-label">Happy Customers</div>
+        </div>
+        <div className="home-stat-item">
+          <div className="home-stat-number">$1.7T</div>
+          <div className="home-stat-label">Assets Under Management</div>
+        </div>
+        <div className="home-stat-item">
+          <div className="home-stat-number">190+</div>
+          <div className="home-stat-label">Countries Supported</div>
+        </div>
+        <div className="home-stat-item">
+          <div className="home-stat-number">100yr</div>
+          <div className="home-stat-label">Banking Experience</div>
+        </div>
+      </div>
+
+      {/* ── FEATURE ROW 1 ── */}
+      <section className="home-feature-row" data-aos="fade-up">
+        <div className="home-feature-image">
+          <img src={transacLogo} alt="Payment Service" />
+        </div>
+        <div className="home-feature-text">
+          <span className="home-feature-eyebrow">On Time, Every Time</span>
+          <h2 className="home-feature-title">
+            World-Class Online Payment Service
+          </h2>
+          <p className="home-feature-body">
+            Our local and international money transfer is the fastest you can
+            find. Transfer funds across countries in minutes — instantly and
+            securely.
+          </p>
+          <p className="home-feature-body">
+            With over a million customers, we have stood the test of time.
+          </p>
+          <button className="btn-primary" onClick={() => navigate("/login")}>
+            Transfer Funds
+          </button>
+        </div>
       </section>
-      <section className="why">
-        <section className="transaction-sect">
-          <div className="transaction-image-container" data-aos="flip-down">
-            <div>
-              <img src={transacLogo3} alt="" />
-            </div>
-          </div>
-          <div data-aos="flip-left">
-            <p className="sub-header-p">ONLINE PAYMENT</p>
-            <h1 className="sub-header-text">
-              Make Your Online Payment Almost Every Site
-            </h1>
-            <p className="sub-p">
-              Take advantage of premium banking privileges, relationship
-              benefits and access to the investment expertise and insights of
-              Wealth Wise, tailored to your needs. Insights to empower confident
-              financial decisions And Goals.
-            </p>
-            <button
-              className="purple-btn"
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Make A Payment
-            </button>
-          </div>
-        </section>
+
+      {/* ── FEATURE ROW 2 ── */}
+      <section className="home-feature-row reverse" data-aos="fade-up">
+        <div className="home-feature-image">
+          <img src={transacLogo2} alt="Why We Stand Out" />
+        </div>
+        <div className="home-feature-text">
+          <span className="home-feature-eyebrow">Do More Your Way</span>
+          <h2 className="home-feature-title">Why We Stand Out</h2>
+          <p className="home-feature-body">
+            With years of investment experience and $1.7 trillion in assets
+            under management, access world-class investment expertise to help
+            meet your important financial goals.
+          </p>
+          <p className="home-feature-body">
+            Experience the very best of internet banking provided by any
+            financial institution.
+          </p>
+          <HashLink smooth to={"#footer"} className="btn-primary" style={{ display: "inline-block" }}>
+            Find a Location
+          </HashLink>
+        </div>
       </section>
-      <section className="brief-intro">
-        <h1 className="sub-header-text" data-aos="fade-down">
-          We Bring Everything In One Place
-        </h1>
-        <p className="sub-p" data-aos="flip-left">
-          Convenient account options for businesses of all sizes. Plus, take
-          advantage of human resource and investment solutions delivered by
-          Wealth Wise. Offer your customers a variety of secure and convenient
-          payment options that make it easy to do business.
+
+      {/* ── FEATURE ROW 3 ── */}
+      <section className="home-feature-row" data-aos="fade-up">
+        <div className="home-feature-image">
+          <img src={transacLogo3} alt="Online Payment" />
+        </div>
+        <div className="home-feature-text">
+          <span className="home-feature-eyebrow">Online Payment</span>
+          <h2 className="home-feature-title">
+            Make Payments on Almost Any Site
+          </h2>
+          <p className="home-feature-body">
+            Take advantage of premium banking privileges, relationship benefits,
+            and access to investment expertise tailored to your needs. Insights
+            to empower confident financial decisions.
+          </p>
+          <button className="btn-primary" onClick={() => navigate("/login")}>
+            Make a Payment
+          </button>
+        </div>
+      </section>
+
+      {/* ── APP PREVIEW ── */}
+      <section className="home-app-preview">
+        <h2 className="home-section-title">Everything in One Place</h2>
+        <p className="home-section-sub">
+          Convenient account options for businesses of all sizes. Offer your
+          customers a variety of secure and convenient payment options.
         </p>
-        <div className="brief-intro-child">
-          <div className="brief-intro-child-1">
-            <img src={briefLogo} alt="" />
+        <img src={briefLogo} alt="App Preview" className="home-app-preview-img" />
+      </section>
+
+      {/* ── CORPORATE BANKING ── */}
+      <section className="home-corporate">
+        <div className="home-corporate-inner">
+          <div className="home-corporate-left">
+            <img src={payment} alt="Corporate Banking" />
           </div>
-          <div className="brief-intro-child-2" data-aos="fade-right"></div>
-        </div>
-        <div className="brief-intro-child-two">
-          <img src={briefLogo} alt="" />
-        </div>
-      </section>
-      <section className="what_we_offer flex">
-        <div>
-          <h1 className="sub-header-text">Banking for Corporate</h1>
-          <p className="sub-p">High End Banking Solution To Large Corporate</p>
-          <img src={payment} alt="" />
-        </div>
-        <div className="what_we_offer_children">
-          <HashLink smooth to={"#commercial"}>
-            <div>
-              <img src={commercial} alt="" />
-              <p>Commercial C/A</p>
-              <BsArrowRight />
+          <div className="home-corporate-right">
+            <h2 className="home-section-title dark" style={{ textAlign: "left" }}>
+              Banking for Corporates
+            </h2>
+            <p className="home-section-sub dark" style={{ textAlign: "left", margin: "0 0 32px" }}>
+              High-end banking solutions for large enterprises and growing businesses.
+            </p>
+            <div className="home-corporate-grid">
+              <HashLink smooth to={"#commercial"} className="home-corporate-item">
+                <img src={commercial} alt="" />
+                <p>Commercial C/A</p>
+                <BsArrowRight />
+              </HashLink>
+              <HashLink smooth to={"#commercial"} className="home-corporate-item">
+                <img src={onlineBanking} alt="" />
+                <p>Website &amp; Web App</p>
+                <BsArrowRight />
+              </HashLink>
+              <HashLink smooth to={"#commercial"} className="home-corporate-item">
+                <img src={loan} alt="" />
+                <p>Business Loan</p>
+                <BsArrowRight />
+              </HashLink>
+              <HashLink smooth to={"#commercial"} className="home-corporate-item">
+                <img src={invest} alt="" />
+                <p>Debit Cards</p>
+                <BsArrowRight />
+              </HashLink>
+              <HashLink smooth to={"#commercial"} className="home-corporate-item" style={{ gridColumn: "span 2" }}>
+                <img src={manage} alt="" />
+                <p>Cash Management</p>
+                <BsArrowRight />
+              </HashLink>
             </div>
-          </HashLink>
-          <HashLink smooth to={"#commercial"}>
-            <div>
-              <img src={onlineBanking} alt="" />
-              <p>Website & Web App</p>
-              <BsArrowRight />
-            </div>
-          </HashLink>
-          <HashLink smooth to={"#commercial"}>
-            <div>
-              <img src={loan} alt="" />
-              <p>Business Loan</p>
-              <BsArrowRight />
-            </div>
-          </HashLink>
-          <HashLink smooth to={"#commercial"}>
-            <div>
-              <img src={invest} alt="" />
-              <p>Debit Cards</p>
-              <BsArrowRight />
-            </div>
-          </HashLink>
-          <HashLink smooth to={"#commercial"}>
-            <div>
-              <img src={manage} alt="" />
-              <p>Cash Management</p>
-              <BsArrowRight />
-            </div>
-          </HashLink>
+          </div>
         </div>
       </section>
-      <section className="services-container">
-        <p className="sub-p">Our Services</p>
-        <h1 className="sub-header-text">Get Your Wealth Wise Account</h1>
-        <div className="service" data-aos="fade-left">
-          <div className="service-item flex" id="commercial">
-            <div className="card-image-con flex">
-              <MdAccountBalance />
-            </div>
-            <div>
+
+      {/* ── SERVICES ── */}
+      <section className="home-services" id="commercial">
+        <p className="home-section-label">Our Services</p>
+        <h2 className="home-section-title">Get Your Wealth Wise Account</h2>
+        <p className="home-section-sub">
+          Everything your business or personal finances need, in one place.
+        </p>
+        <div className="home-services-grid">
+          <div className="home-service-card" data-aos="fade-up">
+            <div className="home-service-icon"><MdAccountBalance /></div>
+            <div className="home-service-info">
               <h3>Commercial C/A</h3>
               <p>
-                At Wealth Wise, we understand the challenges and opportunities
-                that come with running a business. That's why we offer a wide
-                range of banking products and services designed to help you
-                achieve your goals, from checking and savings accounts to
-                business loans and lines of credit.
+                A wide range of banking products designed to help you achieve
+                your goals — from checking and savings accounts to business
+                loans and lines of credit.
               </p>
             </div>
           </div>
-          <div className="service-item flex">
-            <div className="card-image-con flex">
-              <TbSend />
-            </div>
-            <div>
+          <div className="home-service-card" data-aos="fade-up">
+            <div className="home-service-icon"><TbSend /></div>
+            <div className="home-service-info">
               <h3>Online Banking</h3>
               <p>
-                Wealth Wise Bank offers a convenient and secure online banking
-                platform that allows you to manage your finances anytime,
-                anywhere. With our online banking services, you can view account
-                balances, transfer funds, pay bills, and more, all from the
-                comfort of your home or office.
+                Manage your finances anytime, anywhere. View account balances,
+                transfer funds, pay bills, and more from the comfort of your
+                home or office.
               </p>
             </div>
           </div>
-          <div className="service-item flex">
-            <div className="card-image-con flex">
-              <RiLuggageDepositLine />
-            </div>
-            <div>
-              <h3>Cards</h3>
+          <div className="home-service-card" data-aos="fade-up">
+            <div className="home-service-icon"><RiLuggageDepositLine /></div>
+            <div className="home-service-info">
+              <h3>Debit Cards</h3>
               <p>
-                Wealth Wise offers secure and convenient debit cards linked
-                directly to your online banking account. Designed for everyday
-                spending, these cards allow you to shop in-store or online,
-                withdraw cash from ATMs, and manage transactions in real-time
-                through the Wealth Wise app. With enhanced security features,
-                instant transaction alerts, and global acceptance, Wealth Wise
-                debit cards provide both control and flexibility for your
-                financial needs. Whether you're budgeting, saving, or simply
-                managing daily expenses, your Wealth Wise debit card makes it
-                easier.
+                Secure debit cards linked to your account for everyday spending
+                — shop in-store or online, withdraw cash, and manage
+                transactions in real-time.
               </p>
             </div>
           </div>
-          <div className="service-item flex">
-            <div className="card-image-con flex">
-              <MdOutlinePayment />
-            </div>
-            <div>
+          <div className="home-service-card" data-aos="fade-up">
+            <div className="home-service-icon"><MdOutlinePayment /></div>
+            <div className="home-service-info">
               <h3>Business Loan</h3>
               <p>
-                Wealth Wise offers a range of loan products to help you achieve
-                your financial goals. Whether you need a personal loan for
-                unexpected expenses, a business loan to fund your startup, or a
-                mortgage to buy your dream home, Wealth Wise has you covered.
+                Personal loans, business loans, and mortgages designed to help
+                you achieve your financial goals — whatever they may be.
               </p>
             </div>
           </div>
         </div>
       </section>
-      <section className="our-speciality">
-        <p className="sub-p">Our Speciality</p>
-        <h1 className="sub-header-text">We Bring Everything in one place</h1>
-        <p className="sub-p">
-          Earn 5,000 bonus points as a bonafide customer on Wealth Wise Terms
-          and conditions applied.
+
+      {/* ── SPECIALITY ── */}
+      <section className="home-speciality">
+        <p className="home-section-label" style={{ color: "#2563eb" }}>Our Speciality</p>
+        <h2 className="home-section-title dark">We Bring Everything in One Place</h2>
+        <p className="home-section-sub dark">
+          Earn 5,000 bonus points as a Wealth Wise customer. Terms and conditions apply.
         </p>
         <Card cards={cardDetails} aos={"fade-right"} />
       </section>
-      <section className="what-customer-say">
-        <p className="sub-p">CLIENTS OPINION</p>
-        <h1 className="sub-header-text">What Users Say About US</h1>
-        <p className="sub-p">Over a million customers cannot be wrong.</p>
-        <div className="customers-comment flex">
-          <div data-aos="fade-right">
-            <p className="sub-p">
-              O Am Very Glad I Made The Right Choice Banking With Wealth Wise
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="home-testimonials">
+        <p className="home-section-label" style={{ color: "#2563eb" }}>Clients' Opinion</p>
+        <h2 className="home-section-title dark">What Our Users Say</h2>
+        <p className="home-section-sub dark">Over a million customers cannot be wrong.</p>
+        <div className="home-testimonials-grid">
+          <div className="testimonial-card" data-aos="fade-right">
+            <p className="testimonial-quote">
+              I am very glad I made the right choice banking with Wealth Wise. The experience has been seamless from day one.
             </p>
-            <div className="flex">
-              <div className="flex">
-                <img src={cardLogo1} alt="" />
-              </div>
+            <div className="testimonial-author">
+              <div className="testimonial-avatar">H</div>
               <div>
-                <p className="sub-p">Harrison</p>
-                <p className="sub-p">Enterpreneur</p>
+                <p className="testimonial-name">Harrison</p>
+                <p className="testimonial-role">Entrepreneur</p>
               </div>
             </div>
           </div>
-          <div data-aos="fade-left">
-            <p className="sub-p">
-              Transactions are fast and ease Banking With Wealth Wise
+          <div className="testimonial-card" data-aos="fade-left">
+            <p className="testimonial-quote">
+              Transactions are fast and easy. Banking with Wealth Wise has completely transformed how I manage my money.
             </p>
-            <div className="flex">
-              <div className="flex">
-                <img src={cardLogo1} alt="" />
-              </div>
+            <div className="testimonial-author">
+              <div className="testimonial-avatar">B</div>
               <div>
-                <p className="sub-p">Betty</p>
-                <p className="sub-p">Enterpreneur</p>
+                <p className="testimonial-name">Betty</p>
+                <p className="testimonial-role">Entrepreneur</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
       <Footer />
       <Contact />
-    </section>
+    </div>
   );
 };
 
