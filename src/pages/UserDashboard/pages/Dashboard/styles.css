@@ -379,6 +379,8 @@
   height: auto;
   display: block;
   object-fit: contain;
+  /* wealthwise.png is white — invert to dark on the white header */
+  filter: brightness(0);
 }
 
 .dashboard_profile {
