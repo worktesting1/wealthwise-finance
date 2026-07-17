@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useGlobalContext } from "../../../../context/context";
-import wealthwise from "../../../../assets/wealthwise.png";
+import wealthwise from "../../../../assets/mobilewealth.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const { userDetails } = useGlobalContext();
