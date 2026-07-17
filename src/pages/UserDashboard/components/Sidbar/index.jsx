@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useGlobalContext } from "../../../../context/context";
-import logo from "../../../../assets/wealthwise.png";
+import logo from "../../../../assets/Logo-black.svg";
 import avatarFallback from "../../../../assets/mobilewealth.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 const Sidebar = () => {
