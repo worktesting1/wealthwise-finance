@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Header, Card, Loader, Contact } from "../../components";
+import { Footer, Header, Loader, Contact } from "../../components";
 import { HashLink } from "react-router-hash-link";
 import { BsArrowRight } from "react-icons/bs";
 import { MdAccountBalance, MdOutlinePayment } from "react-icons/md";
@@ -15,7 +15,7 @@ import loan from "../../assets/loan.png";
 import onlineBanking from "../../assets/online-banking.png";
 import manage from "../../assets/manage.png";
 import transacLogo from "../../assets/3.png";
-import transacLogo2 from "../../assets/back.png";
+import transacLogo2 from "../../assets/payment-service-3.png";
 import transacLogo3 from "../../assets/online-payment.png";
 import briefLogo from "../../assets/scrn-1.png";
 import cardLogo1 from "../../assets/feature-icon-1.png";
@@ -283,7 +283,17 @@ const Home = () => {
         <p className="home-section-sub dark">
           Earn 5,000 bonus points as a Wealth Wise customer. Terms and conditions apply.
         </p>
-        <Card cards={cardDetails} aos={"fade-right"} />
+        <div className="spec-grid" data-aos="fade-right">
+          {cardDetails.map((card) => (
+            <div className="spec-card" key={card.id}>
+              <div className="spec-card-icon">
+                <img src={card.image} alt={card.title} />
+              </div>
+              <h3 className="spec-card-title">{card.title}</h3>
+              <p className="spec-card-body">{card.para}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── TESTIMONIALS ── */}
