@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { CiMenuFries } from "react-icons/ci";
-import logo from "../../../../assets/Logo-black.svg";
-import avatarFallback from "../../../../assets/mobilewealth.png";
+import wealthwise from "../../../../assets/mobilewealth.png";
 import { useGlobalContext } from "../../../../context/context";
 
 function DashboardHeader() {
@@ -27,7 +26,7 @@ function DashboardHeader() {
         <img src={logo} alt="Wealth Wise Logo" />
         <div className="dashboard_profile">
           <img
-            src={profileImage?.length === 1 ? profileImage[0]?.url : avatarFallback}
+            src={profileImage?.length === 1 ? profileImage[0]?.url : wealthwise}
             alt="profile picture"
           />
         </div>

@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useGlobalContext } from "../../../../context/context";
-import logo from "../../../../assets/Logo-black.svg";
+import wealthwise from "../../../../assets/wealthwise.png";
 import avatarFallback from "../../../../assets/mobilewealth.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 const Sidebar = () => {
@@ -22,7 +22,7 @@ const Sidebar = () => {
         {/* Logo */}
         <div className="logo-container">
           <Link to="/dashboard" className="logo-link">
-            <img src={logo} alt="Logo" className="logo-image" />
+            <img src={wealthwise} alt="Logo" className="logo-image" />
           </Link>
         </div>
 
@@ -35,7 +35,7 @@ const Sidebar = () => {
                   src={
                     profileImage?.length === 1
                       ? profileImage[0]?.url
-                      : avatarFallback
+                      : wealthwise
                   }
                   alt="Jacob"
                   className="avatar-image"
