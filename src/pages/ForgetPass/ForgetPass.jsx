@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./ForgetPass.css";
-import mac from "../../assets/mac.png";
-import { Purple } from "../../components";
+import logo from "../../assets/wealthwise.png";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { useGlobalContext } from "../../context/context";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ColorRing } from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import { MdEmail, MdArrowBack } from "react-icons/md";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -29,70 +30,101 @@ const ForgetPass = () => {
         email: data.email,
       });
       if (resetPassword.status === 200) {
-        toast.success("Forget Password Link Successfully Sent to Your Email");
+        toast.success("Reset link sent! Check your inbox.");
         setLoading(false);
       }
     } catch (error) {
-      if (error.response.data === "Wrong credentials") {
-        toast.error("Wrong credentials");
-        setLoading(false);
+      if (error.response?.data === "Wrong credentials") {
+        toast.error("No account found with that email.");
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
+      setLoading(false);
     }
   };
 
   return (
-    <section className="login flex forget_pass">
-      <div className="login-image-container">
-        <img src={mac} alt="mac" />
-        <h1 className="sub-header-text">All in One Transfer Solution</h1>
-        <p className="sub-p">
-          Transfer Funds Across All Country in Minutes and Our Transfer is
-          instant
-        </p>
-      </div>
-      <div className="login-form-container">
-        <h1 className="sub-header-text diff">Enter Email To Reset Password</h1>
-        <p className="sub-p">
-          Fill the form below to reset your Wealth Wise account Password.
-        </p>
+    <>
+      <ToastContainer position="top-right" autoClose={3500} />
+      <div className="forget-page">
+        {/* Left branding panel */}
+        <div className="forget-left-panel">
+          <div className="forget-panel-content">
+            <img src={logo} alt="Wealth Wise" className="forget-panel-logo" />
 
-        {/*User Reset Password Form */}
+            <div className="forget-panel-icon">
+              <MdEmail />
+            </div>
 
-        <form
-          className="login-form"
-          onSubmit={handleSubmit((data) => handleLoginForm(data))}
-        >
-          <div>
-            <h3>Email</h3>
-            <input
-              type="email"
-              placeholder="Your Email"
-              {...register("email", { required: true })}
-            />
+            <h2 className="forget-panel-title">Forgot your password?</h2>
+            <p className="forget-panel-sub">
+              No worries — it happens. Enter your email address and we'll send
+              you a secure link to reset your password.
+            </p>
+
+            <div className="forget-steps">
+              <div className="forget-step">
+                <div className="forget-step-num">1</div>
+                <span className="forget-step-text">Enter your registered email address</span>
+              </div>
+              <div className="forget-step">
+                <div className="forget-step-num">2</div>
+                <span className="forget-step-text">Check your inbox for the reset link</span>
+              </div>
+              <div className="forget-step">
+                <div className="forget-step-num">3</div>
+                <span className="forget-step-text">Create a new secure password</span>
+              </div>
+            </div>
           </div>
-          <Purple
-            title={
-              loading ? (
+        </div>
+
+        {/* Right form panel */}
+        <div className="forget-right-panel">
+          <span className="forget-form-eyebrow">Password Reset</span>
+          <h1 className="forget-form-title">Reset your password</h1>
+          <p className="forget-form-sub">
+            Enter the email address linked to your Wealth Wise account and we'll
+            email you a reset link.
+          </p>
+
+          <form onSubmit={handleSubmit(handleLoginForm)}>
+            <div className="forget-field">
+              <label htmlFor="forget-email">Email Address</label>
+              <input
+                id="forget-email"
+                type="email"
+                placeholder="you@example.com"
+                {...register("email", { required: true })}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="forget-submit-btn"
+              disabled={loading}
+            >
+              {loading ? (
                 <ColorRing
-                  visible={true}
-                  height="40"
-                  width="40"
-                  ariaLabel="blocks-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="blocks-wrapper"
+                  visible
+                  height="36"
+                  width="36"
+                  ariaLabel="loading"
                   colors={["#fff", "#fff", "#fff", "#fff", "#fff"]}
                 />
               ) : (
-                "Reset"
-              )
-            }
-          />
-        </form>
-        <Link to={"/login"} className="dont">
-          <span>Login</span>
-        </Link>
+                "Send Reset Link"
+              )}
+            </button>
+          </form>
+
+          <Link to="/login" className="forget-back-link">
+            <MdArrowBack />
+            Back to sign in
+          </Link>
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 

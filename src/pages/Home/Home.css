@@ -613,6 +613,14 @@
 }
 
 @media (max-width: 500px) {
+  .home-hero {
+    padding: 120px 20px 48px;
+  }
+
+  .home-hero-title {
+    font-size: 30px;
+  }
+
   .home-stats {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
@@ -623,11 +631,45 @@
     font-size: 26px;
   }
 
+  .home-feature-row,
+  .home-feature-row.reverse {
+    padding: 48px 20px;
+    gap: 32px;
+  }
+
+  .home-feature-title {
+    font-size: 26px;
+  }
+
+  .home-services {
+    padding: 48px 20px;
+  }
+
+  .home-corporate {
+    padding: 48px 20px;
+  }
+
   .home-corporate-grid {
     grid-template-columns: 1fr 1fr;
   }
 
+  .home-speciality {
+    padding: 48px 20px;
+  }
+
+  .home-testimonials {
+    padding: 48px 20px;
+  }
+
+  .home-app-preview {
+    padding: 48px 20px;
+  }
+
   .home-section-title {
-    font-size: 28px;
+    font-size: 26px;
+  }
+
+  .home-section-sub {
+    font-size: 14px;
   }
 }

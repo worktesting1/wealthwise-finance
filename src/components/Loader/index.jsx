@@ -1,24 +1,23 @@
 import "../Loader/Loader.css";
-// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { CirclesWithBar } from "react-loader-spinner";
+import logo from "../../assets/wealthwise.png";
 
 const Loader = () => {
   return (
     <div className="loader_con">
-      <CirclesWithBar
-        height="100"
-        width="100"
-        color="#fff"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-        outerCircleColor=""
-        innerCircleColor=""
-        barColor=""
-        ariaLabel="circles-with-bar-loading"
-      />
-      <h1 data-aos="flip-up">Wealth Wise</h1>
-      <h1 data-aos="flip-down"></h1>
+      <div className="loader-ring-wrap">
+        <div className="loader-ring" />
+        <div className="loader-ring-inner" />
+        <div className="loader-logo-center">
+          <img src={logo} alt="Wealth Wise" />
+        </div>
+      </div>
+
+      <p className="loader-wordmark">Wealth Wise</p>
+      <p className="loader-tagline">Digital Banking</p>
+
+      <div className="loader-bar-track">
+        <div className="loader-bar-fill" />
+      </div>
     </div>
   );
 };
