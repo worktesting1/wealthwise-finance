@@ -28,7 +28,8 @@
 .ls_hero_inner {
   position: relative;
   z-index: 1;
-  padding: 28px 22px 0;
+  /* 68px DashboardHeader + 8px breathing room = 76px on mobile */
+  padding: 76px 22px 0;
 }
 
 .ls_hero_badge {

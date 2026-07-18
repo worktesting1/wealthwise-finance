@@ -481,6 +481,13 @@
   margin-top: 10px;
 }
 
+/* Desktop: loan hero inner accounts for fixed DesktopHeader (64px) */
+@media (min-width: 768px) {
+  .bank_desktop_dashboard_body .ls_hero_inner {
+    padding-top: 88px;
+  }
+}
+
 /* Desktop layout */
 @media (min-width: 768px) {
   .ln_benefits_grid {
