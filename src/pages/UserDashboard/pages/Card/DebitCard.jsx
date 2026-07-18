@@ -15,10 +15,11 @@ const DebitCard = ({ name, card_number, ccv, cardType, createdAt }) => {
   const expMonth  = (dateObj.getMonth() + 1).toString().padStart(2, "0");
   const expYear   = (dateObj.getFullYear() % 100) + 4;
 
-  const gradient =
-    cardType === "Visa"
-      ? "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)"
-      : "linear-gradient(135deg, #0f172a 0%, #3b0764 55%, #7c3aed 100%)";
+  // Default to the Visa (first) design when cardType is missing or unrecognised
+  const isMastercard = cardType === "Mastercard";
+  const gradient = isMastercard
+    ? "linear-gradient(135deg, #0f172a 0%, #3b0764 55%, #7c3aed 100%)"
+    : "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)";
 
   return (
     <div className="bank_card">

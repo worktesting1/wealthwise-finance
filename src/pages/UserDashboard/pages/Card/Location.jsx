@@ -28,7 +28,7 @@ function generateCcv() {
   return number;
 }
 
-const Location = () => {
+const Location = ({ onCardTypeChange }) => {
   const [cardType, setCardType]   = useState("");
   const [address, setAddress]     = useState("");
   const [amount, setAmount]       = useState("");
@@ -90,7 +90,10 @@ const Location = () => {
         <Select
           placeholder="Select card type"
           options={cardOptions}
-          onChange={(e) => setCardType(e.label)}
+          onChange={(e) => {
+            setCardType(e.label);
+            if (onCardTypeChange) onCardTypeChange(e.label);
+          }}
           styles={{
             control: (base, state) => ({
               ...base,

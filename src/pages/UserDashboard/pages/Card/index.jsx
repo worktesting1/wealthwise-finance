@@ -4,6 +4,7 @@ import DebitCard from "./DebitCard";
 import Location from "./Location";
 import map from "../../../../assets/images/map.png";
 import visa from "../../../../assets/images/visa.png";
+import master from "../../../../assets/images/master.png";
 import pattern from "../../../../assets/images/pattern.png";
 import chip from "../../../../assets/images/chip.png";
 import { toast } from "react-toastify";
@@ -12,62 +13,61 @@ import Sidebar from "../../components/Sidbar";
 import DesktopHeader from "../../components/DesktopHeader";
 
 /* ── Placeholder card shown before applying ── */
-const PlaceholderCard = () => (
-  <div className="bank_card">
-    <div className="bank_card_inner">
-      {/* Front */}
-      <div
-        className="bank_card_front"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)",
-        }}
-      >
-        <img src={map} alt="" className="bank_card_map" />
-        <div className="bank_card_row">
-          <img src={chip} alt="chip" />
-          <img src={visa} alt="visa" className="bank_card_logo" />
-        </div>
-        <p className="bank_card_placeholder_number">•••• •••• •••• ••••</p>
-        <div className="bank_card_row bank_card_labels">
-          <span>CARD HOLDER</span>
-          <span>VALID TILL</span>
-        </div>
-        <div className="bank_card_row bank_card_name">
-          <span>YOUR NAME</span>
-          <span>MM / YY</span>
-        </div>
-      </div>
-      {/* Back */}
-      <div
-        className="bank_card_back"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)",
-        }}
-      >
-        <img src={map} alt="" className="bank_card_map" />
-        <div className="bank_card_barcode" />
-        <div className="bank_card_cvv">
-          <div className="bank_card_cvv_strip">
-            <img src={pattern} alt="pattern" />
+const PlaceholderCard = ({ cardType = "Visa" }) => {
+  const isMastercard = cardType === "Mastercard";
+  const gradient = isMastercard
+    ? "linear-gradient(135deg, #0f172a 0%, #3b0764 55%, #7c3aed 100%)"
+    : "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)";
+
+  return (
+    <div className="bank_card">
+      <div className="bank_card_inner">
+        {/* Front */}
+        <div className="bank_card_front" style={{ backgroundImage: gradient }}>
+          <img src={map} alt="" className="bank_card_map" />
+          <div className="bank_card_row">
+            <img src={chip} alt="chip" />
+            <img
+              src={isMastercard ? master : visa}
+              alt={cardType}
+              className="bank_card_logo"
+            />
           </div>
-          <span className="bank_card_cvv_code">•••</span>
+          <p className="bank_card_placeholder_number">•••• •••• •••• ••••</p>
+          <div className="bank_card_row bank_card_labels">
+            <span>CARD HOLDER</span>
+            <span>VALID TILL</span>
+          </div>
+          <div className="bank_card_row bank_card_name">
+            <span>YOUR NAME</span>
+            <span>MM / YY</span>
+          </div>
         </div>
-        <div className="bank_card_text">
-          <p>
-            Spend easily and securely anywhere, at any time, with our
-            International Debit Card.
-          </p>
-        </div>
-        <div className="bank_card_sig">
-          <span>CUSTOMER SIGNATURE</span>
-          <img src={visa} alt="" />
+        {/* Back */}
+        <div className="bank_card_back" style={{ backgroundImage: gradient }}>
+          <img src={map} alt="" className="bank_card_map" />
+          <div className="bank_card_barcode" />
+          <div className="bank_card_cvv">
+            <div className="bank_card_cvv_strip">
+              <img src={pattern} alt="pattern" />
+            </div>
+            <span className="bank_card_cvv_code">•••</span>
+          </div>
+          <div className="bank_card_text">
+            <p>
+              Spend easily and securely anywhere, at any time, with our
+              International Debit Card.
+            </p>
+          </div>
+          <div className="bank_card_sig">
+            <span>CUSTOMER SIGNATURE</span>
+            <img src={isMastercard ? master : visa} alt={cardType} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ── Pending / verifying card ── */
 const PendingCard = () => (
@@ -102,6 +102,7 @@ const PendingCard = () => (
 ══════════════════════════════════════════ */
 const CardContent = () => {
   const [step, setStep] = useState(1);
+  const [previewCardType, setPreviewCardType] = useState("Visa");
   const user = JSON.parse(sessionStorage.getItem("user")) || {};
   const { cardAmount, cardIssuing } = user;
   const { userCards, formatNumber } = useGlobalContext();
@@ -281,7 +282,9 @@ const CardContent = () => {
   return (
     <div className="card_page">
       <h1 className="card_page_title">Card Delivery Details</h1>
-      <Location />
+      <PlaceholderCard cardType={previewCardType} />
+      <p className="flip_hint">Hover to preview both sides</p>
+      <Location onCardTypeChange={setPreviewCardType} />
     </div>
   );
 };
