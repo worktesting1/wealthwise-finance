@@ -6,17 +6,17 @@ import ProfileHeader from "./ProfileHeader";
 import ProfileNavigation from "./ProfileNavigation";
 import HelpCard from "./HelperCard";
 import ProfileInformation from "./ProfileInformation";
+import SecurityPanel from "./SecurityPanel";
 import axios from "axios";
 import { toast } from "react-toastify";
 import DesktopHeader from "../../components/DesktopHeader";
 import Sidebar from "../../components/Sidbar";
 
-const ProfileCotent = () => {
+const ProfileContent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [profileImage, setProfileImage] = useState(
-    "https://fwiseb.online/storage/app/public/photos/X1hQX7splash-2048x2732.png1745340280"
-  );
+  const [profileImage, setProfileImage] = useState(null);
+  const [activeTab, setActiveTab] = useState("info");
 
   const { getUser, userDetails, baseUrl } = useGlobalContext();
   const accessToken = JSON.parse(sessionStorage.getItem("userToken"));
@@ -26,11 +26,9 @@ const ProfileCotent = () => {
     accountNum,
     _id,
     profileImage: profile,
-  } = JSON.parse(sessionStorage.getItem("user")) || userDetails;
+  } = JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const handleUpload = (file) => {
-    // Here you would typically upload the file to your server
-    // For demo purposes, we'll just create a local URL
     const imageUrl = URL.createObjectURL(file);
     setProfileImage(imageUrl);
 
@@ -41,35 +39,47 @@ const ProfileCotent = () => {
       .put(`${baseUrl}/api/users/user/profile/${_id}`, formData, {
         headers: { token: accessToken },
       })
-      .then((response) => {
+      .then(() => {
         setLoader(false);
-        toast.success("Profile Image Uploaded");
+        toast.success("Profile image updated");
         getUser(accessToken, _id);
-        setTimeout(() => {
-          setIsModalOpen(false);
-        }, 2000);
+        setTimeout(() => setIsModalOpen(false), 2000);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoader(false);
-        toast.error("Profile Image Upload Failed");
+        toast.error("Profile image upload failed");
       });
   };
 
-  const userProfile = profile?.length === 1 ? profile[0]?.url : profileImage;
+  const userProfile =
+    profile?.length === 1
+      ? profile[0]?.url
+      : profileImage ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(
+          `${firstName} ${lastName}`
+        )}&background=1e3a5f&color=fff&size=128`;
 
   return (
     <section className="user_profile_wrapper">
-      <h1 className="text-gray-900 text-xl font-bold">Account Settings</h1>
-
+      {/* Avatar / identity card */}
       <ProfileHeader
         profileImage={userProfile}
         accountNumber={accountNum}
         name={`${firstName} ${lastName}`}
         onEditClick={() => setIsModalOpen(true)}
       />
-      <ProfileNavigation />
+
+      {/* Tab switcher */}
+      <ProfileNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {/* Tab content */}
+      {activeTab === "info" && <ProfileInformation />}
+      {activeTab === "security" && <SecurityPanel />}
+
+      {/* Help card */}
       <HelpCard />
-      <ProfileInformation />
+
+      {/* Avatar upload modal */}
       <ProfilePictureModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -81,7 +91,7 @@ const ProfileCotent = () => {
 };
 
 const Profile = () => {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user")) || {};
   const token = JSON.parse(sessionStorage.getItem("userToken"));
   const _id = user._id;
   const {
@@ -92,24 +102,30 @@ const Profile = () => {
     getAllDeposits,
     getAllLoans,
   } = useGlobalContext();
+
   useEffect(() => {
+    if (!_id || !token) return;
     getUserWithdrawals(token, _id);
     getUser(token, _id);
     getTotalBalance(_id, token);
     getKYC(token, _id);
     getAllDeposits(token, _id);
     getAllLoans(token, _id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
+      {/* Mobile layout */}
       <div className="bank_dashbaord">
-        <ProfileCotent />
+        <ProfileContent />
       </div>
+      {/* Desktop layout */}
       <div className="bank_desktop_dashboard">
         <Sidebar />
         <div className="bank_desktop_dashboard_body">
           <DesktopHeader />
-          <ProfileCotent />
+          <ProfileContent />
         </div>
       </div>
     </>

@@ -1,69 +1,50 @@
 .container {
-  padding: 1rem;
-  background-color: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid #f3f4f6;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.navList {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  gap: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 6px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-.navItem {
+.tab {
+  flex: 1;
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.navItem:hover {
-  background-color: #f9fafb;
-}
-
-.navItemActive {
-  background-color: #f0f9ff;
-  color: #1e40af;
-}
-
-.navIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 0.75rem;
-}
-
-.navIconActive {
-  color: #1e40af;
-}
-
-.navIconInactive {
-  color: #6b7280;
-}
-
-.navButton {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  color: #374151;
+  color: #64748b;
   background: none;
   border: none;
   cursor: pointer;
-  text-align: left;
-  transition: background-color 0.2s;
+  transition: background 0.18s, color 0.18s;
+  font-family: "Poppins", sans-serif;
+  white-space: nowrap;
 }
 
-.navButton:hover {
-  background-color: #f9fafb;
+.tab:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.tabActive {
+  background: #0f172a;
+  color: white;
+}
+
+.tabActive:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.tabIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }

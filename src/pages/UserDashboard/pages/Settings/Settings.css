@@ -1,29 +1,94 @@
-.user_settings {
-    background-color: black;
-    height: 100vh;
+.settings_wrapper {
+  padding: 24px 20px 120px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.user_settings_main {
-    margin-top: 60px;
-    padding: 50px 20px;
+.bank_desktop_dashboard_body .settings_wrapper {
+  padding-top: 88px;
 }
 
-.user_settings_main .sub-p {
-    color: white;
-    margin-bottom: 20px;
+.settings_title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
 }
 
-.user_settings .user_profile_details {
-    margin: 0px;
-    padding: 0px;
+/* Group */
+.settings_group {
+  margin-bottom: 20px;
 }
 
-.user_settings .user_profile_details .flex {
-    justify-content: space-between;
-    color: white;
-    cursor: pointer;
+.settings_group_label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  padding: 0 4px;
 }
 
-.user_settings .user_profile_details .flex h3 {
-    margin-bottom: 0px;
+/* Card shell */
+.settings_card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Row */
+.settings_row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+  transition: background 0.15s;
+}
+
+.settings_row:hover {
+  background: #f8fafc;
+}
+
+.settings_row_icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.settings_row_text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings_row_label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.settings_row_sub {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.settings_row_chevron {
+  width: 18px;
+  height: 18px;
+  color: #cbd5e1;
+  flex-shrink: 0;
 }

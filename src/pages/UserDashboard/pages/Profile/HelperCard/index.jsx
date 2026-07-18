@@ -5,22 +5,18 @@ import { TbArrowNarrowRight } from "react-icons/tb";
 const HelpCard = () => {
   return (
     <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <div className={styles.iconContainer}>
-          <CiCircleQuestion className={styles.icon} />
-        </div>
-        <h3 className={styles.cardTitle}>Need Help?</h3>
+      <div className={styles.iconContainer}>
+        <CiCircleQuestion className={styles.icon} />
       </div>
-      <p className={styles.cardText}>
-        Contact our support team if you need assistance with your account
-        settings or have any questions.
-      </p>
-      <a
-        href="mailto:wealthwise@cosultant.online"
-        className={styles.contactLink}
-      >
+      <div className={styles.textBlock}>
+        <h3 className={styles.cardTitle}>Need Help?</h3>
+        <p className={styles.cardText}>
+          Contact our support team for account assistance.
+        </p>
+      </div>
+      <a href="mailto:wealthwise@cosultant.online" className={styles.contactLink}>
         Contact Support
-        <TbArrowNarrowRight className={styles.linkIcon} size={16} />
+        <TbArrowNarrowRight className={styles.linkIcon} />
       </a>
     </div>
   );
