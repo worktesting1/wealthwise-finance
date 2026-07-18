@@ -14,13 +14,17 @@ import DesktopHeader from "../../components/DesktopHeader";
 
 /* ── Placeholder card shown before applying ── */
 const PlaceholderCard = ({ cardType = "Visa" }) => {
+  const [tapped, setTapped] = useState(false);
   const isMastercard = cardType === "Mastercard";
   const gradient = isMastercard
     ? "linear-gradient(135deg, #0f172a 0%, #3b0764 55%, #7c3aed 100%)"
     : "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)";
 
   return (
-    <div className="bank_card">
+    <div
+      className={`bank_card${tapped ? " bank_card_tapped" : ""}`}
+      onClick={() => setTapped((t) => !t)}
+    >
       <div className="bank_card_inner">
         {/* Front */}
         <div className="bank_card_front" style={{ backgroundImage: gradient }}>
@@ -135,7 +139,7 @@ const CardContent = () => {
           cardType={cardDetails.cardType}
           createdAt={cardDetails.createdAt}
         />
-        <p className="flip_hint">Hover to flip &amp; see CVV</p>
+        <p className="flip_hint">Tap or hover to flip &amp; see CVV</p>
 
         <div className="card_details_panel">
           <div className="panel_row">

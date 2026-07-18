@@ -33,6 +33,7 @@
   font-family: "Josefin Sans", sans-serif;
   cursor: pointer;
   perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .bank_card_inner {
@@ -41,10 +42,14 @@
   position: relative;
   transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
-.bank_card:hover .bank_card_inner {
+/* hover (desktop) OR tapped class (mobile) */
+.bank_card:hover .bank_card_inner,
+.bank_card.bank_card_tapped .bank_card_inner {
   transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
 }
 
 .bank_card_front,
@@ -58,11 +63,13 @@
   border-radius: 18px;
   overflow: hidden;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .bank_card_back {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 /* map overlay — behind all content */

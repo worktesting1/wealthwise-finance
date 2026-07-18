@@ -1,3 +1,4 @@
+import { useState } from "react";
 import chip from "../../../../assets/images/chip.png";
 import visa from "../../../../assets/images/visa.png";
 import map from "../../../../assets/images/map.png";
@@ -5,6 +6,7 @@ import pattern from "../../../../assets/images/pattern.png";
 import master from "../../../../assets/images/master.png";
 
 const DebitCard = ({ name, card_number, ccv, cardType, createdAt }) => {
+  const [tapped, setTapped] = useState(false);
   const cardNumberStr = card_number?.toString() || "0000000000000000";
   const seg1 = "4" + cardNumberStr.slice(0, 3);
   const seg2 = cardNumberStr.slice(3, 7);
@@ -22,7 +24,10 @@ const DebitCard = ({ name, card_number, ccv, cardType, createdAt }) => {
     : "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)";
 
   return (
-    <div className="bank_card">
+    <div
+      className={`bank_card${tapped ? " bank_card_tapped" : ""}`}
+      onClick={() => setTapped((t) => !t)}
+    >
       <div className="bank_card_inner">
         {/* ── Front ── */}
         <div className="bank_card_front" style={{ backgroundImage: gradient }}>
