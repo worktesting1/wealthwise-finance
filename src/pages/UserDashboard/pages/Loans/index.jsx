@@ -1,5 +1,5 @@
-import LoanServicesCard from "../../components/LoanServicesCard";
 import "./styles.css";
+import LoanServicesCard from "../../components/LoanServicesCard";
 import WhyChooseUs from "./WhyChooseUs";
 import LoanTypes from "./LoanTypes";
 import HowItWorks from "./HowItWork";
@@ -22,6 +22,7 @@ function LoansContent() {
   const {
     baseUrl,
     getAllLoans,
+    loanHistory,
     userDetails,
     isKYC,
     closeKYCModal,
@@ -32,6 +33,7 @@ function LoansContent() {
     setShowKYCModal,
     setShowPendingModal,
   } = useGlobalContext();
+
   const accessToken = JSON.parse(sessionStorage.getItem("userToken"));
   const { firstName, lastName, _id } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
@@ -45,41 +47,52 @@ function LoansContent() {
         .post(`${baseUrl}/api/loan`, formData, {
           headers: { token: accessToken },
         })
-        .then((response) => {
-          toast.success("Loan Proccessed");
+        .then(() => {
+          toast.success("Loan application submitted successfully!");
           getAllLoans(accessToken, _id);
           setLoading(false);
-
           setTimeout(() => {
             setIsModalOpen(false);
             setHasActiveLoan(true);
           }, 2000);
         })
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
         });
     }
-    if (isKYC === null) {
-      setShowKYCModal(true);
-    }
-    if (isKYC === false) {
-      setShowPendingModal(true);
-    }
+    if (isKYC === null) setShowKYCModal(true);
+    if (isKYC === false) setShowPendingModal(true);
   };
 
   return (
-    <section className="loans_wrapper">
-      <h1 className="text-gray-900 text-xl font-bold"> Loan Services</h1>
+    <div className="ln_page">
+      {/* Hero */}
       <LoanServicesCard />
-      <WhyChooseUs />
-      <LoanTypes />
-      <HowItWorks />
-      <FAQ />
-      <CallToAction
-        onApplyClick={() => setIsModalOpen(true)}
-        hasActiveLoan={hasActiveLoan}
-        setHasActiveLoan={setHasActiveLoan}
-      />
+
+      {/* Page body */}
+      <div className="ln_body">
+        {/* Active loan notice */}
+        {loanHistory.length > 0 && (
+          <div className="ln_loan_notice">
+            <span className="ln_loan_notice_icon">⚠️</span>
+            <span className="ln_loan_notice_text">
+              You have an active or pending loan application. New applications are
+              locked until it is resolved.
+            </span>
+          </div>
+        )}
+
+        <WhyChooseUs />
+        <LoanTypes />
+        <HowItWorks />
+        <FAQ />
+        <CallToAction
+          onApplyClick={() => setIsModalOpen(true)}
+          hasActiveLoan={hasActiveLoan}
+        />
+      </div>
+
+      {/* Modals */}
       <LoanApplicationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -91,13 +104,12 @@ function LoansContent() {
         onClose={closeKYCModal}
         onSubmit={handleKYCSubmit}
       />
-
       <KYCPendingModal
         show={showPendingModal}
         onClose={closePendingKYCModal}
-        estimatedTime="24-48 hours" // Optional prop
+        estimatedTime="24-48 hours"
       />
-    </section>
+    </div>
   );
 }
 
@@ -113,6 +125,7 @@ const Loans = () => {
     getAllDeposits,
     getAllLoans,
   } = useGlobalContext();
+
   useEffect(() => {
     getUserWithdrawals(token, _id);
     getUser(token, _id);
@@ -120,7 +133,9 @@ const Loans = () => {
     getKYC(token, _id);
     getAllDeposits(token, _id);
     getAllLoans(token, _id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <div className="bank_dashbaord">
@@ -136,4 +151,5 @@ const Loans = () => {
     </>
   );
 };
+
 export default Loans;

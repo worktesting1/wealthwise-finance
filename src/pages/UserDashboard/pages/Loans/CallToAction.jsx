@@ -1,43 +1,48 @@
-import styles from "./CallToAction.module.css";
+import "./styles.css";
 import { CiLock } from "react-icons/ci";
-import { FaFile } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { useGlobalContext } from "../../../../context/context";
 
 const CallToAction = ({ hasActiveLoan, onApplyClick }) => {
   const { loanHistory } = useGlobalContext();
+  const isRestricted = hasActiveLoan || loanHistory.length > 0;
+
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>Ready to get started?</h3>
-      <p className={styles.description}>
-        Apply now and get a decision on your loan application quickly
-      </p>
+    <div className="ln_cta">
+      <div className="ln_cta_inner">
+        <p className="ln_cta_title">
+          {isRestricted ? "Application Restricted" : "Ready to Apply?"}
+        </p>
+        <p className="ln_cta_sub">
+          {isRestricted
+            ? "You already have an active or pending loan. Please settle it before applying again."
+            : "Get a decision within 24 hours. No hidden fees, no paperwork hassle."}
+        </p>
 
-      <button
-        className={`${styles.button} ${
-          hasActiveLoan || loanHistory.length > 0 ? styles.buttonDisabled : ""
-        }`}
-        disabled={hasActiveLoan || (loanHistory.length > 0 && true)}
-        onClick={onApplyClick}
-      >
-        {hasActiveLoan || loanHistory?.length > 0 ? (
-          <>
-            <CiLock className={styles.buttonIcon} />
-            Application Restricted
-          </>
-        ) : (
-          <>
-            <FaFile className={styles.buttonIcon} />
-            Apply for a Loan
-          </>
-        )}
-      </button>
+        <button
+          className="ln_cta_btn"
+          disabled={isRestricted}
+          onClick={onApplyClick}
+        >
+          {isRestricted ? (
+            <>
+              <CiLock size={18} />
+              Locked — Active Loan Exists
+            </>
+          ) : (
+            <>
+              Apply for a Loan
+              <FaArrowRight size={14} />
+            </>
+          )}
+        </button>
 
-      {hasActiveLoan ||
-        (loanHistory.length > 0 && (
-          <p className={styles.message}>
-            You already have an active or pending loan application
+        {!isRestricted && (
+          <p className="ln_cta_note">
+            Applying does not affect your credit score
           </p>
-        ))}
+        )}
+      </div>
     </div>
   );
 };

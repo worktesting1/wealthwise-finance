@@ -1,63 +1,50 @@
-import styles from "./styles.module.css";
+import "./styles.css";
 import { GoClock } from "react-icons/go";
-import { BsPercent } from "react-icons/bs";
-import { MdOutlineShield } from "react-icons/md";
+import { BsPercent, BsShieldCheck } from "react-icons/bs";
 import { FaFileAlt } from "react-icons/fa";
-import { FiCheckCircle } from "react-icons/fi";
 
-const WhyChooseUs = () => {
-  return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>
-        <div className={styles.iconContainer}>
-          <FiCheckCircle className={styles.icon} />
-        </div>
-        Why Choose Our Loan Services
-      </h3>
+const benefits = [
+  {
+    icon: <GoClock size={18} color="#2563eb" />,
+    bg: "#dbeafe",
+    title: "Quick Approval",
+    text: "Decision within hours, funds within days",
+  },
+  {
+    icon: <BsPercent size={18} color="#16a34a" />,
+    bg: "#dcfce7",
+    title: "Low Rates",
+    text: "Competitive APR tailored to your profile",
+  },
+  {
+    icon: <FaFileAlt size={16} color="#d97706" />,
+    bg: "#fef3c7",
+    title: "Simple Process",
+    text: "Minimal paperwork, fast online form",
+  },
+  {
+    icon: <BsShieldCheck size={18} color="#7c3aed" />,
+    bg: "#ede9fe",
+    title: "Secure",
+    text: "Bank-level encryption on all data",
+  },
+];
 
-      <div className={styles.grid}>
-        <div className={styles.card}>
-          <GoClock className={styles.cardIcon} />
-          <div>
-            <h4 className={styles.cardTitle}>Quick Approval</h4>
-            <p className={styles.cardText}>
-              Get a decision within hours and funds within days
-            </p>
+const WhyChooseUs = () => (
+  <div className="ln_section">
+    <p className="ln_section_label">Why Choose Us</p>
+    <div className="ln_benefits_grid">
+      {benefits.map((b) => (
+        <div className="ln_benefit" key={b.title}>
+          <div className="ln_benefit_icon" style={{ background: b.bg }}>
+            {b.icon}
           </div>
+          <div className="ln_benefit_title">{b.title}</div>
+          <div className="ln_benefit_text">{b.text}</div>
         </div>
-
-        <div className={styles.card}>
-          <BsPercent className={styles.cardIcon} />
-          <div>
-            <h4 className={styles.cardTitle}>Competitive Rates</h4>
-            <p className={styles.cardText}>
-              Low interest rates tailored to your credit profile
-            </p>
-          </div>
-        </div>
-
-        <div className={styles.card}>
-          <FaFileAlt className={styles.cardIcon} />
-          <div>
-            <h4 className={styles.cardTitle}>Simple Process</h4>
-            <p className={styles.cardText}>
-              Straightforward application with minimal paperwork
-            </p>
-          </div>
-        </div>
-
-        <div className={styles.card}>
-          <MdOutlineShield className={styles.cardIcon} />
-          <div>
-            <h4 className={styles.cardTitle}>Secure & Confidential</h4>
-            <p className={styles.cardText}>
-              Your information is protected with bank-level security
-            </p>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default WhyChooseUs;

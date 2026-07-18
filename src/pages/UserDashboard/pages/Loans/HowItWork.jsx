@@ -1,60 +1,41 @@
-import { MdInfoOutline } from "react-icons/md";
-import styles from "./HowItWorks.module.css";
+import "./styles.css";
 
-const HowItWorks = () => {
-  return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>
-        <div className={styles.titleIconContainer}>
-          <MdInfoOutline className={styles.titleIcon} />
-        </div>
-        How It Works
-      </h3>
+const steps = [
+  {
+    num: "1",
+    title: "Apply Online",
+    desc: "Complete our simple form with your details and loan requirements. Takes under 5 minutes.",
+  },
+  {
+    num: "2",
+    title: "Quick Review",
+    desc: "Our team reviews your application, usually within a few hours.",
+  },
+  {
+    num: "3",
+    title: "Get Funded",
+    desc: "Once approved, the loan amount is transferred directly to your account.",
+  },
+];
 
-      <div className={styles.stepsContainer}>
-        {/* Vertical connector line */}
-        <div className={styles.connectorLine}></div>
-
-        <div className={styles.steps}>
-          {/* Step 1 */}
-          <div className={styles.step}>
-            <div className={styles.stepNumber}>1</div>
-            <div className={styles.stepContent}>
-              <h4 className={styles.stepTitle}>Apply Online</h4>
-              <p className={styles.stepDescription}>
-                Complete our simple online application form with your details
-                and loan requirements
-              </p>
-            </div>
+const HowItWorks = () => (
+  <div className="ln_section">
+    <p className="ln_section_label">How It Works</p>
+    <div className="ln_steps">
+      {steps.map((s, i) => (
+        <div className="ln_step" key={s.num}>
+          <div className="ln_step_left">
+            <div className="ln_step_num">{s.num}</div>
+            {i < steps.length - 1 && <div className="ln_step_line" />}
           </div>
-
-          {/* Step 2 */}
-          <div className={styles.step}>
-            <div className={styles.stepNumber}>2</div>
-            <div className={styles.stepContent}>
-              <h4 className={styles.stepTitle}>Quick Review</h4>
-              <p className={styles.stepDescription}>
-                Our team reviews your application and may contact you for
-                additional information
-              </p>
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className={styles.step}>
-            <div className={styles.stepNumber}>3</div>
-            <div className={styles.stepContent}>
-              <h4 className={styles.stepTitle}>Approval & Disbursement</h4>
-              <p className={styles.stepDescription}>
-                Once approved, the loan amount will be transferred to your
-                account
-              </p>
-            </div>
+          <div className="ln_step_body">
+            <div className="ln_step_title">{s.title}</div>
+            <p className="ln_step_desc">{s.desc}</p>
           </div>
         </div>
-      </div>
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default HowItWorks;
