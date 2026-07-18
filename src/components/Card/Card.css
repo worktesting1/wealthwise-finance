@@ -4,7 +4,8 @@
     gap: 24px;
 }
 
-.card {
+/* Scoped to .card-container to prevent global bleed */
+.card-container .card {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -19,7 +20,7 @@
     overflow: hidden;
 }
 
-.card::before {
+.card-container .card::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -29,28 +30,28 @@
     z-index: 0;
 }
 
-.card:hover {
+.card-container .card:hover {
     transform: translateY(-6px);
     box-shadow: 0 16px 48px rgba(37, 99, 235, 0.14);
 }
 
-.card:hover::before {
+.card-container .card:hover::before {
     opacity: 1;
 }
 
-.card > * {
+.card-container .card > * {
     position: relative;
     z-index: 1;
 }
 
-.card h3 {
+.card-container .card h3 {
     font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
     color: #0f172a;
 }
 
-.card p {
+.card-container .card p {
     text-align: start;
     font-size: 14px;
     color: #64748b;
@@ -73,7 +74,7 @@
     transition: background 220ms ease, border-color 220ms ease;
 }
 
-.card:hover .card-image-con {
+.card-container .card:hover .card-image-con {
     background: #dbeafe;
     border-color: #93c5fd;
 }
