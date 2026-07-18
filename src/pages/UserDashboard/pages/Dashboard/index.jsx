@@ -102,8 +102,8 @@ const DashboardOverView = () => {
   const { userDetails, formatNumber, totalAmount } = useGlobalContext();
   const { accountNum, firstName, profileImage } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
-  const currencySymbol = userDetails?.country?.symbol || "$";
-  const currencyCode = userDetails?.country?.currency || "USD";
+  const currencySymbol = userDetails?.currencySymbol || "$";
+  const currencyCode = userDetails?.currency || "USD";
   const totalBalance =
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
 
