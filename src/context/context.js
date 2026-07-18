@@ -4,7 +4,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
-  const baseUrl = "https://wealthwise-api-lmji.onrender.com";
+  const baseUrl = "https://wealthwise-api-lac.vercel.app";
   // const baseUrl = "http://localhost:5000";
   const [kycStatus, setKycStatus] = useState(false);
   const [loading, setLoading] = useState(false);
