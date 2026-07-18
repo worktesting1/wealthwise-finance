@@ -1,11 +1,12 @@
 .settings_wrapper {
-  padding: 24px 20px 120px;
+  padding: 24px 20px 0;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .bank_desktop_dashboard_body .settings_wrapper {
   padding-top: 88px;
+  padding-bottom: 40px;
 }
 
 .settings_title {

@@ -13,55 +13,55 @@ import DesktopHeader from "../../components/DesktopHeader";
 
 /* ── Placeholder card shown before applying ── */
 const PlaceholderCard = () => (
-  <div className="card">
-    <div className="card_inner">
+  <div className="bank_card">
+    <div className="bank_card_inner">
+      {/* Front */}
       <div
-        className="card_front"
+        className="bank_card_front"
         style={{
-          backgroundImage: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)",
+          backgroundImage:
+            "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)",
         }}
       >
-        <img src={map} alt="" className="map_image" />
-        <div className="row">
+        <img src={map} alt="" className="bank_card_map" />
+        <div className="bank_card_row">
           <img src={chip} alt="chip" />
-          <img src={visa} alt="visa" className="visa" />
+          <img src={visa} alt="visa" className="bank_card_logo" />
         </div>
-        <div className="card_number_wrappepr">
-          <span style={{ letterSpacing: "0.2em", fontSize: 20, opacity: 0.5 }}>
-            •••• •••• •••• ••••
-          </span>
+        <p className="bank_card_placeholder_number">•••• •••• •••• ••••</p>
+        <div className="bank_card_row bank_card_labels">
+          <span>CARD HOLDER</span>
+          <span>VALID TILL</span>
         </div>
-        <div className="row card_details_sect">
-          <p>CARD HOLDER</p>
-          <p>VALID TILL</p>
-        </div>
-        <div className="row card_name_sect">
-          <p>YOUR NAME</p>
-          <p>MM / YY</p>
+        <div className="bank_card_row bank_card_name">
+          <span>YOUR NAME</span>
+          <span>MM / YY</span>
         </div>
       </div>
+      {/* Back */}
       <div
-        className="card_back"
+        className="bank_card_back"
         style={{
-          backgroundImage: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)",
+          backgroundImage:
+            "linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1d4ed8 100%)",
         }}
       >
-        <img src={map} alt="" className="map_image" />
-        <div className="bar_code" />
-        <div className="row card_cvv">
-          <div>
+        <img src={map} alt="" className="bank_card_map" />
+        <div className="bank_card_barcode" />
+        <div className="bank_card_cvv">
+          <div className="bank_card_cvv_strip">
             <img src={pattern} alt="pattern" />
           </div>
-          <p>•••</p>
+          <span className="bank_card_cvv_code">•••</span>
         </div>
-        <div className="row card_text">
+        <div className="bank_card_text">
           <p>
             Spend easily and securely anywhere, at any time, with our
             International Debit Card.
           </p>
         </div>
-        <div className="row signature">
-          <p>CUSTOMER SIGNATURE</p>
+        <div className="bank_card_sig">
+          <span>CUSTOMER SIGNATURE</span>
           <img src={visa} alt="" />
         </div>
       </div>
@@ -69,32 +69,37 @@ const PlaceholderCard = () => (
   </div>
 );
 
-/* ── Verifying / pending card ── */
+/* ── Pending / verifying card ── */
 const PendingCard = () => (
-  <div className="card">
-    <div className="card_inner">
+  <div className="bank_card">
+    <div className="bank_card_inner">
       <div
-        className="card_front verification_card"
+        className="bank_card_front bank_card_verify"
         style={{
-          backgroundImage: "linear-gradient(135deg, #0f172a 0%, #78350f 100%)",
+          backgroundImage:
+            "linear-gradient(135deg, #0f172a 0%, #78350f 100%)",
         }}
       >
-        <img src={map} alt="" className="map_image" />
-        <div className="verification_spinner" />
+        <img src={map} alt="" className="bank_card_map" />
+        <div className="bank_card_spinner" />
         <h3>Under Review</h3>
       </div>
       <div
-        className="card_back"
+        className="bank_card_back"
         style={{
-          backgroundImage: "linear-gradient(135deg, #0f172a 0%, #78350f 100%)",
+          backgroundImage:
+            "linear-gradient(135deg, #0f172a 0%, #78350f 100%)",
         }}
       >
-        <img src={map} alt="" className="map_image" />
+        <img src={map} alt="" className="bank_card_map" />
       </div>
     </div>
   </div>
 );
 
+/* ══════════════════════════════════════════
+   MAIN CONTENT — switches on card state
+══════════════════════════════════════════ */
 const CardContent = () => {
   const [step, setStep] = useState(1);
   const user = JSON.parse(sessionStorage.getItem("user")) || {};
@@ -115,7 +120,7 @@ const CardContent = () => {
     const cardNumberStr = cardDetails.cardNumber?.toString() || "";
     const masked = `•••• •••• •••• ${cardNumberStr.slice(-4)}`;
     const dateObj = new Date(cardDetails.createdAt);
-    const expMonth = dateObj.getMonth() + 1;
+    const expMonth = (dateObj.getMonth() + 1).toString().padStart(2, "0");
     const expYear = (dateObj.getFullYear() % 100) + 4;
 
     return (
@@ -131,7 +136,6 @@ const CardContent = () => {
         />
         <p className="flip_hint">Hover to flip &amp; see CVV</p>
 
-        {/* Details panel */}
         <div className="card_details_panel">
           <div className="panel_row">
             <span className="panel_label">Card Number</span>
@@ -140,7 +144,7 @@ const CardContent = () => {
           <div className="panel_row">
             <span className="panel_label">Expiry</span>
             <span className="panel_value">
-              {expMonth.toString().padStart(2, "0")} / {expYear}
+              {expMonth} / {expYear}
             </span>
           </div>
           <div className="panel_row">
@@ -157,19 +161,18 @@ const CardContent = () => {
           </div>
         </div>
 
-        {/* Security tip */}
         <div className="security_notice">
           <span className="security_notice_icon">🔒</span>
           <p>
-            Never share your CVV or full card number with anyone. WealthWise
-            will never ask for this information via email or phone.
+            Never share your CVV or full card number. WealthWise will never
+            ask for this information via email or phone.
           </p>
         </div>
       </div>
     );
   }
 
-  /* ── PENDING / VERIFYING ── */
+  /* ── PENDING ── */
   if (cardDetails !== undefined) {
     return (
       <div className="card_page">
@@ -189,17 +192,35 @@ const CardContent = () => {
 
           <div className="pending_steps">
             {[
-              { label: "Application Submitted", desc: "Your request has been received.", state: "done" },
-              { label: "Payment Verification", desc: "Confirming your issuing fee payment.", state: "active" },
-              { label: "Card Issuance", desc: "Card will be issued after verification.", state: "waiting" },
-              { label: "Delivery", desc: "Card shipped to your address.", state: "waiting" },
+              {
+                label: "Application Submitted",
+                desc: "Your request has been received.",
+                state: "done",
+              },
+              {
+                label: "Payment Verification",
+                desc: "Confirming your issuing fee payment.",
+                state: "active",
+              },
+              {
+                label: "Card Issuance",
+                desc: "Card will be issued after verification.",
+                state: "waiting",
+              },
+              {
+                label: "Delivery",
+                desc: "Card shipped to your address.",
+                state: "waiting",
+              },
             ].map((s, i, arr) => (
               <div key={s.label} className="pending_step">
                 <div className="pending_step_line">
                   <div className={`pending_step_dot ${s.state}`}>
                     {s.state === "done" ? "✓" : i + 1}
                   </div>
-                  {i < arr.length - 1 && <div className="pending_step_connector" />}
+                  {i < arr.length - 1 && (
+                    <div className="pending_step_connector" />
+                  )}
                 </div>
                 <div className="pending_step_content">
                   <p className="pending_step_label">{s.label}</p>
@@ -213,7 +234,7 @@ const CardContent = () => {
     );
   }
 
-  /* ── NO CARD — STEP 1: Apply CTA ── */
+  /* ── NO CARD — Step 1: Apply ── */
   if (step === 1) {
     return (
       <div className="card_page">
@@ -228,20 +249,22 @@ const CardContent = () => {
               <p className="no_card_cta_title">WealthWise Debit Card</p>
               <p className="no_card_cta_fee">One-time issuance fee</p>
             </div>
-            <div className="fee_pill">${formatNumber ? formatNumber(cardAmount) : cardAmount}</div>
+            <div className="fee_pill">
+              ${formatNumber ? formatNumber(cardAmount) : cardAmount}
+            </div>
           </div>
 
           <ul className="benefits_list">
             {[
-              "Accepted worldwide — Visa &amp; Mastercard networks",
+              "Accepted worldwide — Visa & Mastercard networks",
               "Use online, in-store, and at ATMs globally",
               "Zero hidden transaction fees",
-              "Instant card freeze &amp; unfreeze in-app",
+              "Instant card freeze & unfreeze in-app",
               "Issuance fee is refundable",
             ].map((b) => (
               <li key={b} className="benefit_item">
                 <span className="benefit_check">✓</span>
-                <span dangerouslySetInnerHTML={{ __html: b }} />
+                <span>{b}</span>
               </li>
             ))}
           </ul>
@@ -254,7 +277,7 @@ const CardContent = () => {
     );
   }
 
-  /* ── NO CARD — STEP 2: Location / delivery form ── */
+  /* ── NO CARD — Step 2: Delivery form ── */
   return (
     <div className="card_page">
       <h1 className="card_page_title">Card Delivery Details</h1>
@@ -263,6 +286,9 @@ const CardContent = () => {
   );
 };
 
+/* ══════════════════════════════════════════
+   PAGE SHELL (mobile + desktop layout)
+══════════════════════════════════════════ */
 const Card = () => {
   const user = JSON.parse(sessionStorage.getItem("user")) || {};
   const token = JSON.parse(sessionStorage.getItem("userToken"));
