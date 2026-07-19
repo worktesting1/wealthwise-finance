@@ -105,7 +105,7 @@ const AppProvider = ({ children }) => {
 
   const getTotalBalance = (userId, token) => {
     axios
-      .get(`${baseUrl}/api/wallet/${userId}`, { headers: { token } })
+      .get(`${baseUrl}/api/wallet/balance/${userId}`, { headers: { token } })
       .then((response) => {
         setTotalAmount(response.data.balanceUSD);
         sessionStorage.setItem(
