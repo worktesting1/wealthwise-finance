@@ -131,9 +131,7 @@
   font-size: 11px;
   font-weight: 600;
   border-radius: 50px;
-  background: rgba(74, 222, 128, 0.15);
-  border: 1px solid rgba(74, 222, 128, 0.3);
-  color: #4ade80;
+  border: 1px solid transparent;
 }
 
 .verification-badge svg {
@@ -143,6 +141,12 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* KYC state modifiers */
+.kyc-badge--verified   { background: rgba(74,222,128,0.15);  border-color: rgba(74,222,128,0.30);  color: #4ade80; }
+.kyc-badge--pending    { background: rgba(251,191,36,0.15);   border-color: rgba(251,191,36,0.30);  color: #fbbf24; }
+.kyc-badge--rejected   { background: rgba(248,113,113,0.15);  border-color: rgba(248,113,113,0.30); color: #f87171; }
+.kyc-badge--unverified { background: rgba(148,163,184,0.15);  border-color: rgba(148,163,184,0.25); color: #94a3b8; }
 
 /* ── Section title ── */
 .menu-title {

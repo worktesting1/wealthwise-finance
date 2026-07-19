@@ -224,11 +224,16 @@
   padding: 3px 10px;
   font-size: 11px; font-weight: 600;
   border-radius: 50px;
-  background: #f0fdf4;
-  color: #166534;
+  border: 1px solid transparent;
 }
 
 .kyc-icon { height: 11px; width: 11px; }
+
+/* KYC state modifiers */
+.kyc-badge--verified   { background: rgba(74,222,128,0.12);  border-color: rgba(74,222,128,0.30);  color: #16a34a; }
+.kyc-badge--pending    { background: rgba(251,191,36,0.12);   border-color: rgba(251,191,36,0.30);  color: #d97706; }
+.kyc-badge--rejected   { background: rgba(248,113,113,0.12);  border-color: rgba(248,113,113,0.30); color: #dc2626; }
+.kyc-badge--unverified { background: rgba(148,163,184,0.10);  border-color: rgba(148,163,184,0.20); color: #64748b; }
 
 .dropdown-item {
   display: flex;

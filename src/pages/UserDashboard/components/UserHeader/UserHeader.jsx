@@ -14,12 +14,13 @@ import { MdVerified } from "react-icons/md";
 import { useGlobalContext } from "../../../../context/context";
 import { useNavigate } from "react-router-dom";
 import { RiLuggageDepositLine } from "react-icons/ri";
+import { getKYCBadgeConfig } from "../../../../utils/kycBadge";
 
 const UserHeader = ({ transferAmount, depositAmount }) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const { username, accountNum } = user;
   const accessToken = JSON.parse(sessionStorage.getItem("userToken"));
-  const { userNav, setUserNav, toggleNave, userData, getUserKYC, kycStatus } =
+  const { userNav, setUserNav, toggleNave, userData, getUserKYC, kycStatus, isKYC } =
     useGlobalContext();
   const navigate = useNavigate();
   const { profit, country } = userData;
@@ -124,31 +125,20 @@ const UserHeader = ({ transferAmount, depositAmount }) => {
         >
           <div className="navigation-header flex">
             <h3>{username} </h3>
-            {kycStatus[0]?.status ? (
-              <span
-                style={{
-                  color: "#00ff00",
-                  fontSize: "13px",
-                  marginRight: "0",
-                }}
-              >
-                Verified
-              </span>
-            ) : (
-              // <MdVerified className='verified' />
-              <span
-                onClick={() => {
-                  navigate("/dash/verify");
-                }}
-                style={{
-                  color: "#ebaf22",
-                  fontSize: "13px",
-                  marginRight: "0",
-                }}
-              >
-                inactive
-              </span>
-            )}
+            {(() => {
+              const badge = getKYCBadgeConfig(isKYC);
+              const colorMap = {
+                "kyc-badge--verified":   "#4ade80",
+                "kyc-badge--pending":    "#fbbf24",
+                "kyc-badge--rejected":   "#f87171",
+                "kyc-badge--unverified": "#94a3b8",
+              };
+              return (
+                <span style={{ color: colorMap[badge.colorClass] || "#94a3b8", fontSize: "13px", marginRight: "0" }}>
+                  {badge.label}
+                </span>
+              );
+            })()}
             <FaTimes id="nav" onClick={toggleNave} />
           </div>
           <div className="flex navigation-header">

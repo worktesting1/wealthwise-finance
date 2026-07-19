@@ -2,9 +2,10 @@ import "./styles.css";
 import { useGlobalContext } from "../../../../context/context";
 import wealthwise from "../../../../assets/wealthwise.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { getKYCBadgeConfig } from "../../../../utils/kycBadge";
 const Sidebar = () => {
-  const { userDetails } = useGlobalContext();
-  const { accountNum, firstName, profileImage, lastName, isKYC } =
+  const { userDetails, isKYC } = useGlobalContext();
+  const { accountNum, firstName, profileImage, lastName } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -49,28 +50,22 @@ const Sidebar = () => {
             </div>
 
             {/* KYC Verification Status */}
-            <div className="kyc-status">
-              <div className="kyc-verified">
-                <span className="kyc-text">
-                  <svg
-                    className="kyc-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                    <path d="m9 11 3 3L22 4"></path>
-                  </svg>{" "}
-                  KYC {isKYC ? "Verified" : "Unverified"}
-                </span>
-              </div>
-            </div>
+            {(() => {
+              const badge = getKYCBadgeConfig(isKYC);
+              return (
+                <div className="kyc-status">
+                  <div className={`kyc-verified ${badge.colorClass}`}>
+                    <span className="kyc-text">
+                      <svg className="kyc-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                        <path d="m9 11 3 3L22 4"></path>
+                      </svg>{" "}
+                      {badge.label}
+                    </span>
+                  </div>
+                </div>
+              );
+            })()}
 
             <div className="user-actions">
               <Link to={"/dashboard/account-settings"} className="profile-btn">

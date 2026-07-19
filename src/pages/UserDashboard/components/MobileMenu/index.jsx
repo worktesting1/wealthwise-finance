@@ -2,6 +2,7 @@ import "./MobileMenu.css";
 import { useGlobalContext } from "../../../../context/context";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { getKYCBadgeConfig } from "../../../../utils/kycBadge";
 
 const menuItems = [
   {
@@ -147,18 +148,18 @@ const MobileMenu = ({ onClose }) => {
               {firstName} {lastName}
             </h2>
             <p>Account: {accountNum}</p>
-            <div className="verification-badge">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                <path d="m9 11 3 3L22 4"></path>
-              </svg>
-              <span>{isKYC ? "Verified" : "Unverified"}</span>
-            </div>
+            {(() => {
+              const badge = getKYCBadgeConfig(isKYC);
+              return (
+                <div className={`verification-badge ${badge.colorClass}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                    <path d="m9 11 3 3L22 4"></path>
+                  </svg>
+                  <span>{badge.label}</span>
+                </div>
+              );
+            })()}
           </div>
         </div>
 

@@ -3,14 +3,15 @@ import "./styles.css";
 import { useGlobalContext } from "../../../../context/context";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { getKYCBadgeConfig } from "../../../../utils/kycBadge";
 
 const DesktopHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const { totalAmount, formatNumber, userDetails } = useGlobalContext();
+  const { totalAmount, formatNumber, userDetails, isKYC } = useGlobalContext();
   const navigate = useNavigate();
-  const { accountNum, firstName, profileImage, lastName, isKYC } =
+  const { accountNum, firstName, profileImage, lastName } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const totalBalance =
@@ -152,26 +153,20 @@ const DesktopHeader = () => {
                   <p className="user-id">ID: {accountNum}</p>
 
                   {/* KYC Verification Status */}
-                  <div className="kyc-status">
-                    <span className="kyc-badge">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="kyc-icon"
-                      >
-                        <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                        <path d="m9 11 3 3L22 4"></path>
-                      </svg>{" "}
-                      {isKYC ? "Verified" : "Unverfied"}{" "}
-                    </span>
-                  </div>
+                  {(() => {
+                    const badge = getKYCBadgeConfig(isKYC);
+                    return (
+                      <div className="kyc-status">
+                        <span className={`kyc-badge ${badge.colorClass}`}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="kyc-icon">
+                            <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                            <path d="m9 11 3 3L22 4"></path>
+                          </svg>{" "}
+                          {badge.label}
+                        </span>
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 <a
