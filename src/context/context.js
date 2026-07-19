@@ -122,7 +122,9 @@ const AppProvider = ({ children }) => {
         headers: { token: accessToken },
       })
       .then((response) => {
-        setIsKYC(response?.data?.kyc.status);
+        const status = response?.data?.kyc?.status;
+        // Normalise to lowercase so "Pending"/"pending" both match
+        setIsKYC(status != null ? status.toLowerCase() : null);
       })
       .catch((error) => {});
   };

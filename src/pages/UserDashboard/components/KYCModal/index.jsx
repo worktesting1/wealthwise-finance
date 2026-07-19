@@ -140,7 +140,11 @@ const KYCUploadModal = ({ show, onClose }) => {
     }
 
     if (!formData.idFront) {
-      newErrors.idFront = "Front side is required";
+      newErrors.idFront = "Front side of your ID is required";
+    }
+
+    if (!formData.idBack) {
+      newErrors.idBack = "Back side of your ID is required";
     }
 
     setErrors(newErrors);
@@ -182,6 +186,11 @@ const KYCUploadModal = ({ show, onClose }) => {
       })
       .catch((error) => {
         setLoading(false);
+        const msg =
+          error?.response?.data?.message ||
+          error?.response?.data ||
+          "KYC submission failed. Please try again.";
+        toast.error(typeof msg === "string" ? msg : "KYC submission failed. Please try again.");
       });
 
     // Handle file upload to your backend here
