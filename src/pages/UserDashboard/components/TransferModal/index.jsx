@@ -19,7 +19,6 @@ function TransferModal({
   showWithdrawalModal,
   onClose,
   setTransferDetails,
-  bankDetails,
 }) {
   const [loader, setLoader] = useState(false);
   const {
@@ -37,7 +36,7 @@ function TransferModal({
     JSON.parse(sessionStorage.getItem("totalBalance")) || totalAmount;
   const { _id, firstName, lastName, email } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
-const kyced = true
+
   const {
     handleSubmit,
     register,
@@ -142,22 +141,31 @@ const kyced = true
       data.destinationAddress = data.cashTag;
     }
 
-    if (kyced === null) {
+    if (isKYC === null || isKYC === undefined) {
       setShowKYCModal(true);
-    }
-    if (kyced === false) {
+    } else if (isKYC === "pending" || isKYC === false) {
       setShowPendingModal(true);
     } else {
       setLoader(true);
       setTimeout(() => {
         setLoader(false);
-        if (data.amount > totalBalance) {
+        if (Number(data.amount) > Number(totalBalance)) {
           toast.error("Insufficient Balance");
         } else {
           setShowOTPModal(true);
         }
       }, 2500);
     }
+  };
+
+  // Render the method icon — supports both JSX elements and URL strings
+  const renderMethodIcon = () => {
+    const icon = selectedTransferMethod?.icon;
+    if (!icon) return null;
+    if (typeof icon === "string") {
+      return <img src={icon} alt={selectedTransferMethod?.name || ""} />;
+    }
+    return <span className="modal_icon_svg">{icon}</span>;
   };
 
   return (
@@ -167,9 +175,9 @@ const kyced = true
       }`}
     >
       <div className="transfer_modal_header">
-        <IoMdClose size={25} color="white" onClick={onClose} />
+        <IoMdClose size={25} color="white" onClick={onClose} style={{ cursor: "pointer" }} />
         <div className="modal_image_wrapper">
-          <img src={selectedTransferMethod?.icon} alt="" />
+          {renderMethodIcon()}
         </div>
         <h1>
           {selectedTransferMethod?.name} {isDeposit ? "Deposit" : "Withdrawal"}
@@ -189,6 +197,9 @@ const kyced = true
           placeholder="Transferring Amount"
           {...register("amount")}
         />
+        {errors.amount && (
+          <p className="field_error">{errors.amount.message}</p>
+        )}
         {showAppropriateTransferFields(selectedTransferMethod.id, register)}
         <button className="transfer_btn" onClick={handleSubmit(handleTransfer)}>
           {loader ? (
@@ -204,7 +215,6 @@ const kyced = true
           ) : (
             <FiSend />
           )}
-
           {isDeposit ? (
             <span>Continue to Deposit</span>
           ) : (

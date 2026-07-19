@@ -125,7 +125,7 @@
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .tr_methods_grid {
     grid-template-columns: repeat(3, 1fr);
   }

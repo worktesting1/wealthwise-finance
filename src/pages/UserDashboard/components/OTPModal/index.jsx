@@ -36,31 +36,42 @@ const OTPModal = ({ show, onClose, transferDetails, setShowSuccessModal }) => {
     if (!otp || otp.length !== 6) {
       setError("Please enter a valid 6-digit OTP");
       return;
-    } else {
-      if (transferStep === 1) {
-        if (otp === firstCode) {
-          handleTransferStep();
-        } else {
-          setError("Please enter a valid 6-digit OTP");
-        }
-      } else if (transferStep === 2) {
-        if (otp === secondCode) {
-          handleTransferStep();
-        } else {
-          setError("Please enter a valid 6-digit OTP");
-        }
-      } else if (transferStep === 3) {
-        if (otp === thirdCode) {
-          handleTransferStep();
-        } else {
-          setError("Please enter a valid 6-digit OTP");
-        }
+    }
+
+    // No transferStep (0, null, undefined) → final submit
+    if (!transferStep || transferStep === 0) {
+      if (otp === forthCode || !forthCode) {
+        submitTransfer();
       } else {
-        if (otp === forthCode) {
-          submitTransfer();
-        } else {
-          setError("Please enter a valid 6-digit OTP");
-        }
+        setError("Incorrect code. Please try again.");
+      }
+      return;
+    }
+
+    if (transferStep === 1) {
+      if (otp === firstCode) {
+        handleTransferStep();
+      } else {
+        setError("Incorrect code. Please try again.");
+      }
+    } else if (transferStep === 2) {
+      if (otp === secondCode) {
+        handleTransferStep();
+      } else {
+        setError("Incorrect code. Please try again.");
+      }
+    } else if (transferStep === 3) {
+      if (otp === thirdCode) {
+        handleTransferStep();
+      } else {
+        setError("Incorrect code. Please try again.");
+      }
+    } else {
+      // transferStep >= 4 → final submit
+      if (otp === forthCode) {
+        submitTransfer();
+      } else {
+        setError("Incorrect code. Please try again.");
       }
     }
   };
