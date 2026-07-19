@@ -47,7 +47,7 @@
 .transfer_modal_form input {
   border: 1.5px solid #e2e8f0; outline: none; height: 50px; width: 100%;
   color: #0f172a; font-family: "Poppins", sans-serif;
-  margin-top: 10px; margin-bottom: 20px; font-size: 14px;
+  margin-top: 10px; margin-bottom: 20px; font-size: 16px;
   border-radius: 8px; padding: 0 14px; transition: border-color 0.2s;
 }
 .transfer_modal_form input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
