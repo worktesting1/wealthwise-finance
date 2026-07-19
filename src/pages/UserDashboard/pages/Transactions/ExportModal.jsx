@@ -1,15 +1,32 @@
 import { useState } from "react";
 import { useGlobalContext } from "../../../../context/context";
-// jspdf blocked by security policy — PDF export temporarily unavailable
+import { CiExport } from "react-icons/ci";
+import { MdClose } from "react-icons/md";
+
+// jsPDF blocked by security policy — PDF export temporarily unavailable
 // eslint-disable-next-line
-const jsPDF = function() { return { text:()=>{}, save:()=>{}, addImage:()=>{}, setFontSize:()=>{}, setFont:()=>{}, setTextColor:()=>{}, setFillColor:()=>{}, rect:()=>{}, line:()=>{}, internal:{ pageSize:{ getWidth:()=>595, getHeight:()=>842 } } }; };
+const jsPDF = function () {
+  return {
+    text: () => {},
+    save: () => {},
+    addImage: () => {},
+    setFontSize: () => {},
+    setFont: () => {},
+    setTextColor: () => {},
+    setFillColor: () => {},
+    rect: () => {},
+    line: () => {},
+    internal: { pageSize: { getWidth: () => 595, getHeight: () => 842 } },
+  };
+};
 // eslint-disable-next-line
 const autoTable = () => {};
 
-const ExportModal = ({ showExportModal, onClose, onExport }) => {
-  const [exportType, setExportType] = useState("pdf"); // Default to PDF
-  const [exportAs, setExportAs] = useState("download"); // Default to download
+const ExportModal = ({ showExportModal, onClose }) => {
+  const [exportType, setExportType] = useState("pdf");
+  const [exportAs, setExportAs] = useState("download");
   const [statementStyle, setStatementStyle] = useState("classic");
+
   const {
     loanHistory,
     userWithdrawals,
@@ -18,6 +35,7 @@ const ExportModal = ({ showExportModal, onClose, onExport }) => {
     totalAmount,
     totalWithdrawal,
   } = useGlobalContext();
+
   const { firstName, lastName, email, accountNum } = JSON.parse(
     sessionStorage.getItem("user")
   );
@@ -26,79 +44,39 @@ const ExportModal = ({ showExportModal, onClose, onExport }) => {
   const name = `${firstName} ${lastName}`;
   const userDetails = { name, email, accountNum };
 
-  const transactions = [...loanHistory, ...userWithdrawals, ...depositHistory];
+  const transactions = [
+    ...loanHistory,
+    ...userWithdrawals,
+    ...depositHistory,
+  ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  // Sort by createdAt descending (most recent first)
-  transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-  const handleExport = () => {
-    if (!exportType || !exportAs) {
-      alert("Please select file format and export method");
-      return;
-    }
-
-    if (exportType === "pdf") {
-      const pdfDoc = generatePDF(userDetails, transactions);
-
-      if (exportAs === "download") {
-        pdfDoc.save("account_statement.pdf");
-      } else if (exportAs === "view") {
-        window.open(pdfDoc.output("bloburl"), "_blank");
-      } else if (exportAs === "email") {
-        // In a real app, you would send this to your backend for email delivery
-        alert("Email functionality would be implemented here");
-      }
-    }
-
-    onExport({
-      type: exportType,
-      method: exportAs,
-      style: statementStyle,
-    });
-  };
-
-  const generatePDF = (details, transactions) => {
-    // Initialize jsPDF
+  const generatePDF = (details, txns) => {
     const doc = new jsPDF();
 
-    // Add title
     doc.setFontSize(20);
     doc.setTextColor(40);
     doc.text("Statement of Account", 105, 20, { align: "center" });
 
-    // Add date
     doc.setFontSize(12);
     doc.text(`Generated on ${new Date().toLocaleDateString()}`, 105, 30, {
       align: "center",
     });
 
-    // Add divider line
     doc.setDrawColor(200);
     doc.line(20, 35, 190, 35);
 
-    // Account Information
     doc.setFontSize(14);
     doc.text("ACCOUNT INFORMATION", 20, 45);
-
     doc.setFontSize(12);
     doc.text(`Name: ${details?.name}`, 20, 55);
     doc.text(`Email: ${details?.email}`, 20, 65);
     doc.text(`Account Number: ${details?.accountNum}`, 20, 75);
 
-    // Statement Period
     doc.setFontSize(14);
-    doc.text("Statement Period", 20, 90);
-
-    doc.setFontSize(12);
-    doc.text("- All Transactions", 20, 100);
-    doc.text("- Account Type: Checking Account", 20, 110);
-
-    // Account Summary - Using autoTable
-    doc.setFontSize(14);
-    doc.text("ACCOUNT SUMMARY", 20, 125);
+    doc.text("ACCOUNT SUMMARY", 20, 90);
 
     autoTable(doc, {
-      startY: 130,
+      startY: 95,
       head: [["OPENING BALANCE", "TOTAL CREDITS", "TOTAL DEBITS"]],
       body: [
         [
@@ -108,247 +86,153 @@ const ExportModal = ({ showExportModal, onClose, onExport }) => {
         ],
       ],
       theme: "grid",
-      headStyles: { fillColor: [22, 160, 133] },
+      headStyles: { fillColor: [37, 99, 235] },
     });
 
-    doc.text(`CLOSING BALANCE: $${formatNumber(totalBalance)}`, 20, 160);
+    doc.text(`CLOSING BALANCE: $${formatNumber(totalBalance)}`, 20, 130);
 
-    // Transaction History
     doc.setFontSize(14);
-    doc.text("TRANSACTION HISTORY", 20, 175);
+    doc.text("TRANSACTION HISTORY", 20, 145);
 
-    // Convert transactions array to autoTable format
-    const transactionRows = transactions.map((tx) => [
+    const rows = txns.map((tx) => [
       tx.createdAt,
       tx.email,
       tx.type,
-      tx.status,
+      tx.status === "true" ? "approved" : tx.status,
       tx.txHash || tx.referenceNumber,
       `$${formatNumber(tx.amount)}`,
     ]);
 
-    // Transactions table using autoTable
     autoTable(doc, {
-      startY: 180,
+      startY: 150,
       head: [["DATE", "EMAIL", "TYPE", "STATUS", "REFERENCE", "AMOUNT"]],
-      body: transactionRows,
+      body: rows,
       theme: "grid",
-      headStyles: { fillColor: [22, 160, 133] },
+      headStyles: { fillColor: [37, 99, 235] },
       styles: { fontSize: 10 },
-      columnStyles: {
-        0: { cellWidth: 30 }, // Date column
-        1: { cellWidth: 40 }, // Description
-        5: { cellWidth: 25 }, // Balance
-      },
     });
 
-    // Footer
+    const pageHeight = doc.internal.pageSize.getHeight();
     doc.setFontSize(10);
-    const pageHeight = doc.internal.pageSize.height;
     doc.text(
-      "Please contact our customer support at wealthwise@cosultant.online if you have any questions about this statement.",
-      20,
-      pageHeight - 30
-    );
-    doc.text(
-      "All figures are shown in USD. This document serves as an official record of your account transactions.",
+      "Contact support at wealthwise@consultant.online with any questions.",
       20,
       pageHeight - 20
     );
     doc.text("WealthWise © 2025 All rights reserved", 105, pageHeight - 10, {
       align: "center",
     });
-    doc.text("Page 1 of 1", 190, pageHeight - 10, { align: "right" });
 
     return doc;
+  };
+
+  const handleExport = () => {
+    if (!exportType || !exportAs) {
+      alert("Please select a file format and export method.");
+      return;
+    }
+
+    if (exportType === "pdf") {
+      const pdfDoc = generatePDF(userDetails, transactions);
+      if (exportAs === "download") {
+        pdfDoc.save("account_statement.pdf");
+      } else if (exportAs === "view") {
+        window.open(pdfDoc.output("bloburl"), "_blank");
+      } else if (exportAs === "email") {
+        alert("Email delivery would be implemented here.");
+      }
+    }
+
+    onClose();
   };
 
   if (!showExportModal) return null;
 
   return (
-    <div className="export-modal-overlay">
-      <div className="export-modal-container">
-        {/* Background overlay */}
-        <div className="export-modal-backdrop" aria-hidden="true"></div>
+    <div className="tx_modal_overlay">
+      <div className="tx_modal_backdrop" onClick={onClose} />
 
-        {/* Modal container */}
-        <div className="export-modal-content">
-          {/* Close button */}
-          <div className="export-modal-close">
-            <button
-              onClick={onClose}
-              type="button"
-              className="export-modal-close-btn"
-            >
-              <span className="sr-only">Close</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="export-modal-close-icon"
-              >
-                <path d="M18 6 6 18"></path>
-                <path d="m6 6 12 12"></path>
-              </svg>
-            </button>
+      <div className="tx_modal_sheet">
+        <div className="tx_modal_handle" />
+
+        {/* Header */}
+        <div className="tx_modal_header">
+          <div className="tx_modal_title_wrap">
+            <p className="tx_modal_title">Export Transactions</p>
+            <p className="tx_modal_sub">Download your account statement</p>
           </div>
+          <button className="tx_modal_close" onClick={onClose}>
+            <MdClose />
+          </button>
+        </div>
 
-          {/* Modal content */}
-          <div className="export-modal-header">
-            <div className="export-modal-icon-container">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="export-modal-icon"
+        {/* File format */}
+        <div className="tx_modal_field">
+          <label className="tx_modal_label">File Format</label>
+          <select
+            className="tx_modal_select"
+            value={exportType}
+            onChange={(e) => setExportType(e.target.value)}
+          >
+            <option value="">Select format</option>
+            <option value="pdf">PDF</option>
+          </select>
+        </div>
+
+        {/* Export as */}
+        <div className="tx_modal_field">
+          <label className="tx_modal_label">Delivery</label>
+          <select
+            className="tx_modal_select"
+            value={exportAs}
+            onChange={(e) => setExportAs(e.target.value)}
+          >
+            <option value="">How to receive?</option>
+            <option value="view">Preview in browser</option>
+            <option value="download">Download file</option>
+            <option value="email">Send to email</option>
+          </select>
+        </div>
+
+        {/* Statement style */}
+        <div className="tx_modal_field">
+          <label className="tx_modal_label">Statement Style</label>
+          <div className="tx_style_grid">
+            {["classic", "modern"].map((style) => (
+              <div
+                key={style}
+                className={`tx_style_opt ${statementStyle === style ? "active" : ""}`}
+                onClick={() => setStatementStyle(style)}
               >
-                <path d="M12 15V3"></path>
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <path d="m7 10 5 5 5-5"></path>
-              </svg>
-            </div>
-            <h3 className="export-modal-title" id="export-title">
-              Export Transactions
-            </h3>
-            <p className="export-modal-description">
-              Download or receive your transaction data
-            </p>
-          </div>
-
-          <div className="export-modal-body">
-            <div className="export-modal-field">
-              <label htmlFor="export-type" className="export-modal-label">
-                File Format
-              </label>
-              <select
-                id="export-type"
-                value={exportType}
-                onChange={(e) => setExportType(e.target.value)}
-                className="export-modal-select"
-              >
-                <option value="">Select file type</option>
-                <option value="pdf">PDF</option>
-              </select>
-            </div>
-
-            <div className="export-modal-field">
-              <label htmlFor="export-as" className="export-modal-label">
-                Export as
-              </label>
-              <select
-                id="export-as"
-                value={exportAs}
-                onChange={(e) => setExportAs(e.target.value)}
-                className="export-modal-select"
-              >
-                <option value="">How do you want to receive this file?</option>
-                <option value="view">Preview statement</option>
-                <option value="download">Download file</option>
-                <option value="email">Send file to email</option>
-              </select>
-            </div>
-
-            <div className="export-modal-field">
-              <label className="export-modal-label">Statement Style</label>
-              <div className="export-style-grid">
-                <div
-                  onClick={() => setStatementStyle("modern")}
-                  className={`export-style-option ${
-                    statementStyle === "modern" ? "export-style-selected" : ""
-                  }`}
-                >
-                  <div className="export-style-name">Modern</div>
-                  <div className="export-style-preview">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="export-style-icon"
-                    >
-                      <rect width="7" height="9" x="3" y="3" rx="1"></rect>
-                      <rect width="7" height="5" x="14" y="3" rx="1"></rect>
-                      <rect width="7" height="9" x="14" y="12" rx="1"></rect>
-                      <rect width="7" height="5" x="3" y="16" rx="1"></rect>
-                    </svg>
-                  </div>
+                <div className="tx_style_name">
+                  {style.charAt(0).toUpperCase() + style.slice(1)}
                 </div>
-                <div
-                  onClick={() => setStatementStyle("classic")}
-                  className={`export-style-option ${
-                    statementStyle === "classic" ? "export-style-selected" : ""
-                  }`}
-                >
-                  <div className="export-style-name">Classic</div>
-                  <div className="export-style-preview">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="export-style-icon"
-                    >
-                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                      <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                      <path d="M10 9H8"></path>
-                      <path d="M16 13H8"></path>
-                      <path d="M16 17H8"></path>
+                <div className="tx_style_preview">
+                  {style === "classic" ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                      <path d="M10 9H8M16 13H8M16 17H8"/>
                     </svg>
-                  </div>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect width="7" height="9" x="3" y="3" rx="1"/>
+                      <rect width="7" height="5" x="14" y="3" rx="1"/>
+                      <rect width="7" height="9" x="14" y="12" rx="1"/>
+                      <rect width="7" height="5" x="3" y="16" rx="1"/>
+                    </svg>
+                  )}
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="export-modal-footer">
-            <button
-              onClick={handleExport}
-              type="button"
-              id="export-button"
-              className="export-modal-btn"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="export-modal-btn-icon"
-              >
-                <path d="M12 15V3"></path>
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <path d="m7 10 5 5 5-5"></path>
-              </svg>
-              <span>Export Transactions</span>
-            </button>
+            ))}
           </div>
         </div>
+
+        {/* Submit */}
+        <button className="tx_modal_btn" onClick={handleExport}>
+          <CiExport size={18} />
+          <span>Export Transactions</span>
+        </button>
       </div>
     </div>
   );
