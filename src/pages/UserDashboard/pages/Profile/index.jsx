@@ -18,7 +18,7 @@ const ProfileContent = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [activeTab, setActiveTab] = useState("info");
 
-  const { getUser, userDetails, baseUrl } = useGlobalContext();
+  const { getUser, userDetails, baseUrl, isKYC } = useGlobalContext();
   const accessToken = JSON.parse(sessionStorage.getItem("userToken"));
   const {
     firstName,
@@ -67,6 +67,7 @@ const ProfileContent = () => {
         accountNumber={accountNum}
         name={`${firstName} ${lastName}`}
         onEditClick={() => setIsModalOpen(true)}
+        isKYC={isKYC}
       />
 
       {/* Tab switcher */}
