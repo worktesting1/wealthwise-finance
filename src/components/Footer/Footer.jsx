@@ -1,7 +1,7 @@
 import React from "react";
 import "../Footer/Footer.css";
 import logo from "../../assets/wealthwise.png";
-import { FaFacebookF, FaLinkedinIn, FaTelegramPlane } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -39,12 +39,12 @@ const Footer = () => {
             </a>
             <a
               className="footer-social-btn"
-              href="https://t.me/Paymentmanagements"
+              href="https://wa.me/18257894067"
               target="_blank"
               rel="noreferrer"
-              aria-label="Telegram"
+              aria-label="WhatsApp"
             >
-              <FaTelegramPlane />
+              <FaWhatsapp />
             </a>
           </div>
         </div>

@@ -3,7 +3,7 @@ import "./Contacts.css";
 import { Footer, Header, Loader, Contact } from "../../components";
 import { useGlobalContext } from "../../context/context";
 import { MdEmail, MdLocationOn, MdAccessTime } from "react-icons/md";
-import { FaTelegramPlane } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { BsTelephoneFill } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -63,12 +63,12 @@ const Contacts = () => {
             </div>
           </div>
           <div className="contact-info-card">
-            <div className="contact-info-icon"><FaTelegramPlane /></div>
+            <div className="contact-info-icon"><FaWhatsapp /></div>
             <div>
-              <p className="contact-info-label">Telegram Support</p>
+              <p className="contact-info-label">WhatsApp Support</p>
               <p className="contact-info-value">
-                <a href="https://t.me/Paymentmanagements" target="_blank" rel="noreferrer">
-                  @Paymentmanagements
+                <a href="https://wa.me/18257894067" target="_blank" rel="noreferrer">
+                  +1 825 789 4067
                 </a>
               </p>
             </div>
@@ -131,7 +131,7 @@ const Contacts = () => {
               <h3 className="contact-aside-title">24/7 Customer Support</h3>
               <p className="contact-aside-body">
                 Our support team never sleeps. Reach us any time via email or
-                Telegram and we'll respond promptly.
+                WhatsApp and we'll respond promptly.
               </p>
             </div>
 
@@ -164,8 +164,8 @@ const Contacts = () => {
                 We aim to respond to all email enquiries within{" "}
                 <strong>2–4 hours</strong>. For urgent matters, please reach out
                 via{" "}
-                <a href="https://t.me/Paymentmanagements" target="_blank" rel="noreferrer">
-                  Telegram
+                <a href="https://wa.me/18257894067" target="_blank" rel="noreferrer">
+                  WhatsApp
                 </a>
                 .
               </p>

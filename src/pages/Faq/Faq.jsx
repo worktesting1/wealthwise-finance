@@ -38,7 +38,7 @@ const faqData = {
     },
     {
       q: "Is 24/7 customer care available?",
-      a: "Yes — our customer care team is available around the clock. You can reach us via email, our contact form, or Telegram at any time.",
+      a: "Yes — our customer care team is available around the clock. You can reach us via email, our contact form, or WhatsApp at any time.",
     },
     {
       q: "How do I reach support?",

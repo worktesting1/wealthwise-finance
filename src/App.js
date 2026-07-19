@@ -19,7 +19,7 @@ import { useGlobalContext } from "./context/context";
 
 import PrivateRoutes from "./utils/PrivateRoutes";
 import ResetPass from "./pages/ResetPass/ForgetPass";
-// import { Telegram } from "./components/telegram";
+import { WhatsApp } from "./components/whatsapp";
 import {
   Dashboard,
   Deposit,
@@ -85,7 +85,7 @@ function App() {
           <Route path="/dashboard/irs-refund" element={<IRS />} />
         </Route>
       </Routes>
-      {/* <Telegram /> */}
+      <WhatsApp />
       {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)} />}
       {pathname === "/dashboard" ||
       pathname === "/dashboard/accountHistory" ||
