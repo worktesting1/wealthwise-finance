@@ -5,18 +5,18 @@ import styles from "./ProfileHeader.module.css";
 
 /**
  * Returns badge config based on the KYC status stored in context (isKYC).
- * Possible values after our normalisation: null | "pending" | "true" | true | "false" | false
+ * Possible values after normalisation: null | "pending" | "approved" | "rejected"
  */
 const getKYCBadge = (isKYC) => {
   const status = isKYC === null || isKYC === undefined ? null : String(isKYC).toLowerCase();
 
-  if (status === "true") {
+  if (status === "approved") {
     return { label: "Verified Account", className: styles.badgeVerified, icon: <MdVerified size={13} /> };
   }
   if (status === "pending") {
     return { label: "Verification Pending", className: styles.badgePending, icon: <MdOutlineHourglassEmpty size={13} /> };
   }
-  if (status === "false") {
+  if (status === "rejected") {
     return { label: "Verification Rejected", className: styles.badgeRejected, icon: <MdOutlineCancel size={13} /> };
   }
   // null / anything else → not submitted

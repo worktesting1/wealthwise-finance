@@ -143,7 +143,7 @@ function TransferModal({
 
     if (isKYC === null || isKYC === undefined) {
       setShowKYCModal(true);
-    } else if (isKYC === "pending" || isKYC === false) {
+    } else if (isKYC === "pending" || isKYC === "rejected") {
       setShowPendingModal(true);
     } else {
       setLoader(true);

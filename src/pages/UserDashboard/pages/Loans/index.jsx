@@ -39,7 +39,7 @@ function LoansContent() {
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
   const handleSubmitApplication = (formData) => {
-    if (isKYC === true) {
+    if (isKYC === "approved") {
       formData.name = `${firstName} ${lastName}`;
       formData.userId = _id;
       setLoading(true);
@@ -61,7 +61,7 @@ function LoansContent() {
         });
     }
     if (isKYC === null) setShowKYCModal(true);
-    if (isKYC === false) setShowPendingModal(true);
+    if (isKYC === "rejected") setShowPendingModal(true);
   };
 
   return (
