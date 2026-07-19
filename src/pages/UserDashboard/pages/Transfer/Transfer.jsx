@@ -1,5 +1,4 @@
 import "./styles.css";
-import PaymentMethods from "../../components/PaymentMethods";
 import SecuredTransactions from "../../components/SecuredTransactions";
 import TransferModal from "../../components/TransferModal";
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import KYCPendingModal from "../../components/KYCPendingModal";
 import TransferPendingModal from "../../components/TransferModal/TransferPendingModal";
 import Sidebar from "../../components/Sidbar";
 import DesktopHeader from "../../components/DesktopHeader";
+import TransferPaymentMethods from "../../components/TransferPaymentMethods";
 
 const TransferContent = () => {
   const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
@@ -30,12 +30,25 @@ const TransferContent = () => {
   } = useGlobalContext();
 
   return (
-    <section className="transfer_page">
-      <h2 className="text-gray-900 text-xl font-bold">
-        Select Preffered Method
-      </h2>
-      <PaymentMethods setShowWithdrawalModal={setShowWithdrawalModal} />
-      <SecuredTransactions />
+    <div className="tr_page">
+      {/* Hero banner */}
+      <div className="tr_hero">
+        <p className="tr_hero_eyebrow">Withdraw / Transfer</p>
+        <h1 className="tr_hero_title">Send Funds</h1>
+        <p className="tr_hero_sub">
+          Choose a withdrawal method below. All transfers are encrypted and
+          processed securely.
+        </p>
+      </div>
+
+      {/* Method selection */}
+      <div className="tr_body">
+        <p className="tr_section_label">Select preferred method</p>
+        <TransferPaymentMethods setShowWithdrawalModal={setShowWithdrawalModal} />
+        <SecuredTransactions />
+      </div>
+
+      {/* Modals — unchanged logic */}
       <TransferModal
         showWithdrawalModal={showWithdrawalModal}
         onClose={() => setShowWithdrawalModal(false)}
@@ -57,19 +70,17 @@ const TransferContent = () => {
         onClose={() => setShowTransferPendingModal(false)}
         amount={transferDetails.amount}
       />
-
       <KYCUploadModal
         show={showKYCModal}
         onClose={closeKYCModal}
         onSubmit={handleKYCSubmit}
       />
-
       <KYCPendingModal
         show={showPendingModal}
         onClose={closePendingKYCModal}
-        estimatedTime="24-48 hours" // Optional prop
+        estimatedTime="24-48 hours"
       />
-    </section>
+    </div>
   );
 };
 
@@ -85,14 +96,18 @@ const Transfer = () => {
     getAllDeposits,
     getAllLoans,
   } = useGlobalContext();
+
   useEffect(() => {
+    if (!_id || !token) return;
     getUserWithdrawals(token, _id);
     getUser(token, _id);
     getTotalBalance(_id, token);
     getKYC(token, _id);
     getAllDeposits(token, _id);
     getAllLoans(token, _id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <div className="bank_dashbaord">
