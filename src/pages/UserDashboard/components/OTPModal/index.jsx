@@ -1,14 +1,13 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./styles.css";
 import axios from "axios";
 import { useGlobalContext } from "../../../../context/context";
 import { toast } from "react-toastify";
 
 const OTPModal = ({ show, onClose, transferDetails, setShowSuccessModal }) => {
-  const [digits, setDigits] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const inputRefs = useRef([]);
   const {
     baseUrl,
     userDetails,
@@ -31,40 +30,16 @@ const OTPModal = ({ show, onClose, transferDetails, setShowSuccessModal }) => {
     forthMessage,
   } = JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
 
-  const otp = digits.join("");
-
-  const handleDigitChange = (index, value) => {
-    if (!/^\d?$/.test(value)) return;
-    const next = [...digits];
-    next[index] = value;
-    setDigits(next);
+  const handleChange = (e) => {
+    const val = e.target.value.replace(/\D/g, "").slice(0, 6);
+    setOtp(val);
     setError("");
-    if (value && index < 5) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
-
-  const handleKeyDown = (index, e) => {
-    if (e.key === "Backspace" && !digits[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
-
-  const handlePaste = (e) => {
-    e.preventDefault();
-    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-    if (!pasted) return;
-    const next = [...digits];
-    pasted.split("").forEach((ch, i) => { next[i] = ch; });
-    setDigits(next);
-    const focusIdx = Math.min(pasted.length, 5);
-    inputRefs.current[focusIdx]?.focus();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (otp.length !== 6) {
-      setError("Please enter all 6 digits");
+      setError("Please enter the 6-digit code");
       return;
     }
 
@@ -156,23 +131,18 @@ const OTPModal = ({ show, onClose, transferDetails, setShowSuccessModal }) => {
         </p>
 
         <form onSubmit={handleSubmit}>
-          {/* 6 split digit inputs */}
-          <div className="otp-digits" onPaste={handlePaste}>
-            {digits.map((d, i) => (
-              <input
-                key={i}
-                ref={(el) => (inputRefs.current[i] = el)}
-                className={`otp-digit ${error ? "otp-digit--error" : ""} ${d ? "otp-digit--filled" : ""}`}
-                type="text"
-                inputMode="numeric"
-                maxLength={1}
-                value={d}
-                onChange={(e) => handleDigitChange(i, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(i, e)}
-                autoFocus={i === 0}
-                autoComplete="off"
-              />
-            ))}
+          <div className="otp-input-wrap">
+            <input
+              className={`otp-input${error ? " otp-input--error" : ""}`}
+              type="text"
+              inputMode="numeric"
+              placeholder="Enter 6-digit code"
+              value={otp}
+              onChange={handleChange}
+              autoFocus
+              autoComplete="one-time-code"
+              maxLength={6}
+            />
           </div>
 
           {error && (
