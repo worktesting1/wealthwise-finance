@@ -5,41 +5,50 @@ import DepositDetailsModal from "../../components/DepositDetailsModal";
 import { useGlobalContext } from "../../../../context/context";
 import Sidebar from "../../components/Sidbar";
 import DesktopHeader from "../../components/DesktopHeader";
+import "./Deposit.css";
 
 const DepositContents = () => {
-  const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
+  const [showDepositModal, setShowDepositModal] = useState(false);
   const [activeTab, setActiveTab] = useState("crypto");
 
   const toggleDepositModal = (method) => {
-    if (method === "Cryptocurrency") {
-      setActiveTab("crypto");
-    } else {
-      setActiveTab("bank");
-    }
-    setShowWithdrawalModal(true);
+    setActiveTab(method === "Cryptocurrency" ? "crypto" : "bank");
+    setShowDepositModal(true);
   };
 
   return (
-    <section className="transfer_page">
-      <h2 className="text-gray-900 text-xl font-bold">
-        Select Preffered Method
-      </h2>
-      <DepositPaymentMethods setShowWithdrawalModal={toggleDepositModal} />
-      <SecuredTransactions />
+    <div className="dp_page">
+      {/* Hero banner */}
+      <div className="dp_hero">
+        <p className="dp_hero_eyebrow">Deposit</p>
+        <h1 className="dp_hero_title">Fund Your Account</h1>
+        <p className="dp_hero_sub">
+          Choose a deposit method below. All transactions are encrypted and
+          processed securely.
+        </p>
+      </div>
+
+      {/* Method selection */}
+      <div className="dp_body">
+        <p className="dp_section_label">Select preferred method</p>
+        <DepositPaymentMethods setShowWithdrawalModal={toggleDepositModal} />
+        <SecuredTransactions />
+      </div>
+
       <DepositDetailsModal
-        show={showWithdrawalModal}
-        onClose={() => setShowWithdrawalModal(false)}
+        show={showDepositModal}
+        onClose={() => setShowDepositModal(false)}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-    </section>
+    </div>
   );
 };
 
 const Deposit = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const token = JSON.parse(sessionStorage.getItem("userToken"));
-  const _id = user._id;
+  const _id = user?._id;
   const {
     getUserWithdrawals,
     getTotalBalance,
@@ -48,7 +57,9 @@ const Deposit = () => {
     getAllDeposits,
     getAllLoans,
   } = useGlobalContext();
+
   useEffect(() => {
+    if (!token || !_id) return;
     getUserWithdrawals(token, _id);
     getUser(token, _id);
     getTotalBalance(_id, token);
@@ -56,6 +67,7 @@ const Deposit = () => {
     getAllDeposits(token, _id);
     getAllLoans(token, _id);
   }, []);
+
   return (
     <>
       <div className="bank_dashbaord">

@@ -5,27 +5,19 @@ import { MdOutlineShield } from "react-icons/md";
 const SecuredTransactions = () => {
   const { pathname } = useLocation();
   const isDeposit = pathname === "/dashboard/deposit";
+
   return (
-    <div className="secure-transaction-notice">
-      <div className="notice-container">
-        <div className="notice-content">
-          <div className="icon-container">
-            <MdOutlineShield className="shield-icon" size={25} />
-          </div>
-          <div className="text-container">
-            <h3 className="notice-title">Secure Transaction</h3>
-            {isDeposit ? (
-              <p className="notice-description">
-                All deposits are encrypted and processed securely.
-              </p>
-            ) : (
-              <p className="notice-description">
-                All transfers are encrypted and processed securely. Never share
-                your PIN with anyone.
-              </p>
-            )}
-          </div>
-        </div>
+    <div className="dp_secure">
+      <div className="dp_secure_icon">
+        <MdOutlineShield size={20} />
+      </div>
+      <div className="dp_secure_text">
+        <h4>Secure Transaction</h4>
+        <p>
+          {isDeposit
+            ? "All deposits are end-to-end encrypted and processed securely."
+            : "All transfers are encrypted and processed securely. Never share your PIN with anyone."}
+        </p>
       </div>
     </div>
   );

@@ -1,83 +1,98 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.css";
 import { useGlobalContext } from "../../../../context/context";
 
-const primaryPaymentMethodss = [
+const methods = [
   {
-    id: "wire-transfer",
+    id: "bank-transfer",
     name: "Bank Transfer",
-    description: "Deposit funds directly to our international bank accounts.",
-    icon: "https://www.svgrepo.com/download/1155/wire-transfer-logo.svg",
-    iconSize: "h-5 w-5",
-    bgColor: "bg-blue-100",
+    label: "Wire / SWIFT",
+    description:
+      "Deposit funds directly via international bank wire or SWIFT transfer.",
+    color: "#2563eb",
+    bg: "#dbeafe",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+      </svg>
+    ),
   },
   {
     id: "cryptocurrency",
     name: "Cryptocurrency",
-    description: "Deposit funds through our cryptocurrency wallet.",
-    icon: "https://cdn.jsdelivr.net/npm/cryptocurrency-icons@0.18.1/svg/color/btc.svg",
-    iconSize: "h-10 w-10",
-    bgColor: "bg-purple-100",
+    label: "BTC · ETH · USDT",
+    description:
+      "Deposit using your crypto wallet — fast, borderless, and fee-efficient.",
+    color: "#7c3aed",
+    bg: "#ede9fe",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.5 9H13a2 2 0 0 1 0 4H9.5V9zm0 4h3.5a2 2 0 0 1 0 4H9.5v-4zM9.5 7v2m0 8v2" />
+      </svg>
+    ),
   },
 ];
 
 const DepositPaymentMethods = ({ setShowWithdrawalModal }) => {
   const { setSelectedTransferMethod } = useGlobalContext();
 
-  const changeMethod = (method) => {
-    setShowWithdrawalModal(method);
-  };
-
   return (
-    <div className="payment-methods-container">
-      {/* Primary Payment Methods Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {primaryPaymentMethodss.map((method) => (
+    <div className="dp_methods_grid">
+      {methods.map((method) => (
+        <button
+          key={method.id}
+          className="dp_method_card"
+          onClick={() => {
+            setSelectedTransferMethod(method);
+            setShowWithdrawalModal(method.name);
+          }}
+        >
           <div
-            key={method.id}
-            onClick={() => {
-              setSelectedTransferMethod(method);
-
-              changeMethod(method.name);
-            }}
-            className={`cursor-pointer bg-white rounded-xl border border-gray-200 p-4 hover:border-primary-500 hover:shadow-md transition-all
-             `}
+            className="dp_method_icon"
+            style={{ background: method.bg, color: method.color }}
           >
-            <div className="flex items-center mb-3">
-              <div
-                className={`h-10 w-10 rounded-full ${method.bgColor} flex items-center justify-center`}
-              >
-                {method.icon ? (
-                  <img
-                    src={method.icon}
-                    alt={method.name}
-                    className={method.iconSize}
-                  />
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-5 w-5 text-amber-600"
-                  >
-                    <circle cx="12" cy="12" r="1"></circle>
-                    <circle cx="19" cy="12" r="1"></circle>
-                    <circle cx="5" cy="12" r="1"></circle>
-                  </svg>
-                )}
-              </div>
-              <h3 className="ml-3 font-medium text-gray-900">{method.name}</h3>
-            </div>
-            <p className="text-sm text-gray-500">{method.description}</p>
+            {method.icon}
           </div>
-        ))}
-      </div>
+
+          <div className="dp_method_info">
+            <span className="dp_method_sublabel">{method.label}</span>
+            <h3 className="dp_method_name">{method.name}</h3>
+            <p className="dp_method_desc">{method.description}</p>
+          </div>
+
+          <div className="dp_method_arrow" style={{ color: method.color }}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </div>
+        </button>
+      ))}
     </div>
   );
 };

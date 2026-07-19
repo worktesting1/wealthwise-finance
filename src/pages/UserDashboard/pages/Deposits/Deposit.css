@@ -1,48 +1,95 @@
-.deposit_proof_sect {
-  margin-bottom: 40px;
-}
+/* ═══════════════════════════════════════════
+   DEPOSIT PAGE  —  dp_ namespace
+   ═══════════════════════════════════════════ */
 
-.deposits_container {
-  background-color: #000;
+.dp_page {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background: #f1f5f9;
   min-height: 100vh;
-  padding-bottom: 80px;
-  padding-top: 80px;
 }
 
-.deposits_container .user_dashboard_header {
-  height: 80px;
+/* ── Hero ── */
+.dp_hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+  padding: 32px 22px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.deposits_container .amount-details {
-  display: none;
+.dp_hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 70% 40%, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
 }
 
-.deposits_container > .sub-p {
-  color: white;
-  margin: 0;
-  padding: 20px;
+.dp_hero_eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 10px;
 }
 
-.withdraw_sect_hero h3 {
-  color: white;
+.dp_hero_title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 12px;
+  line-height: 1.15;
 }
 
-.deposit_proof_sect h3 {
-  margin-bottom: 20px !important;
+.dp_hero_sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 auto;
+  max-width: 360px;
+  line-height: 1.65;
 }
 
-.deposit_sect .withdraw_sect_hero .btn {
-  flex-direction: row-reverse !important;
+/* ── Body ── */
+.dp_body {
+  padding: 28px 20px 0;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-.deposit_sect #submit_btn {
-  height: 50px;
-  background-color: #071278;
-  color: white;
+.dp_section_label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px;
 }
 
-.proof {
-  height: 150px;
-  width: auto;
-  margin-top: 20px;
+/* ── Desktop overrides ── */
+@media (min-width: 768px) {
+  .bank_desktop_dashboard_body .dp_page {
+    padding-top: 88px;
+  }
+
+  .dp_hero {
+    padding: 52px 48px 60px;
+  }
+
+  .dp_hero_title {
+    font-size: 42px;
+  }
+
+  .dp_hero_sub {
+    font-size: 15px;
+    max-width: 480px;
+  }
+
+  .dp_body {
+    padding: 36px 48px 0;
+    max-width: 860px;
+  }
 }
