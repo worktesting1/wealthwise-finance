@@ -4,8 +4,7 @@
    PAGE WRAPPER
 ═══════════════════════════════════════ */
 .card_page {
-  /* 68px DashboardHeader + 8px breathing room = 76px on mobile */
-  padding: 76px 20px 0;
+  padding: 100px 20px 0;
   max-width: 520px;
   margin: 0 auto;
 }
