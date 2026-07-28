@@ -141,11 +141,14 @@ function TransferModal({
       data.destinationAddress = data.cashTag;
     }
 
-    if (isKYC === null || isKYC === undefined) {
-      setShowKYCModal(true);
-    } else if (isKYC === "pending" || isKYC === "rejected") {
-      setShowPendingModal(true);
-    } else {
+    //if (isKYC === null || isKYC === undefined) {
+     // setShowKYCModal(true);
+   // }
+    //else if (isKYC === "pending" || isKYC === "rejected") {
+      //setShowPendingModal(true);
+    
+ // }
+    else {
       setLoader(true);
       setTimeout(() => {
         setLoader(false);
