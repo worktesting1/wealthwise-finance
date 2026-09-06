@@ -100,7 +100,7 @@ const DashboardOverView = () => {
   const navigate = useNavigate();
 
   const { userDetails, formatNumber, totalAmount } = useGlobalContext();
-  const { accountNum, firstName, profileImage } =
+  const { accountNum, firstName, profileImage, isSuspended } =
     JSON.parse(sessionStorage.getItem("user")) || userDetails || {};
   const currencySymbol = userDetails?.currencySymbol || "$";
   const currencyCode = userDetails?.currency || "USD";
@@ -149,8 +149,8 @@ const DashboardOverView = () => {
       <div className="overview-account-strip">
         <div className="overview-account-info">
           <div className="overview-status-badge">
-            <FaCircle size={6} color="#4ade80" />
-            <span>Active</span>
+            <FaCircle size={6} color={isSuspended ? "#fb923c" : "#4ade80"} />
+            <span>{isSuspended ? "Suspended" : "Active"}</span>
           </div>
           <p className="overview-account-label">Account Number</p>
           <p className="overview-account-num">{accountNum}</p>
