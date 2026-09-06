@@ -9,8 +9,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { useGlobalContext } from "../../context/context";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TemporarySuspendedModal from "../../components/TemporarySuspendedModal";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -19,6 +20,7 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const [loginLoading, setLoginLoading] = useState(false);
+  const [showSuspendedModal, setShowSuspendedModal] = useState(false);
   const { baseUrl, setHeaderNav, loading } = useGlobalContext();
   const {
     register,
@@ -39,6 +41,10 @@ const Login = () => {
           "userToken",
           JSON.stringify(response.data.accessToken)
         );
+        if (response.data.isSuspended) {
+          setShowSuspendedModal(true);
+          return;
+        }
         toast.success("Login successful!");
         setTimeout(() => navigate("/dashboard"), 2000);
       }
@@ -56,7 +62,7 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} transition={Bounce} />
       <section className="login-page">
         {/* Left decorative panel */}
         <div className="login-left-panel">
@@ -137,6 +143,14 @@ const Login = () => {
           </form>
         </div>
       </section>
+      {showSuspendedModal && (
+        <TemporarySuspendedModal
+          onContinue={() => {
+            setShowSuspendedModal(false);
+            navigate("/dashboard");
+          }}
+        />
+      )}
     </>
   );
 };
