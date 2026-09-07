@@ -1,7 +1,7 @@
 import React from "react";
 import "./TemporarySuspendedModal.css";
 
-const TemporarySuspendedModal = ({ onContinue }) => {
+const TemporarySuspendedModal = ({ onReturnToLogin }) => {
   return (
     <div className="suspended-modal-backdrop">
       <div
@@ -17,16 +17,16 @@ const TemporarySuspendedModal = ({ onContinue }) => {
         <p className="suspended-modal-eyebrow">Account notice</p>
         <h2 id="suspended-modal-title">Your account is temporarily suspended</h2>
         <p id="suspended-modal-description">
-          Your account has been temporarily suspended by the account team. You can
-          continue to your dashboard, but some account actions may be unavailable
-          until the suspension is lifted.
+          Your account has been temporarily suspended by the account team. You
+          cannot access your dashboard until an administrator lifts the
+          suspension.
         </p>
         <button
           type="button"
           className="suspended-modal-button"
-          onClick={onContinue}
+          onClick={onReturnToLogin}
         >
-          Continue to dashboard
+          Return to sign in
         </button>
       </div>
     </div>
