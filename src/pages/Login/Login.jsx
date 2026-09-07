@@ -145,9 +145,11 @@ const Login = () => {
       </section>
       {showSuspendedModal && (
         <TemporarySuspendedModal
-          onContinue={() => {
+          onReturnToLogin={() => {
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("userToken");
             setShowSuspendedModal(false);
-            navigate("/dashboard");
+            navigate("/login", { replace: true });
           }}
         />
       )}
