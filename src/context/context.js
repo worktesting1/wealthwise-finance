@@ -4,7 +4,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || "";
+  const baseUrl = process.env.REACT_APP_API_BASE_URL || "";
   // Falls back to "" (relative URLs) so Vite proxy forwards /api/* to the local Next.js backend
   const [kycStatus, setKycStatus] = useState(false);
   const [loading, setLoading] = useState(false);
