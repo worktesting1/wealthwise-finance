@@ -1,7 +1,7 @@
 import React from "react";
 import "./TemporarySuspendedModal.css";
 
-const TemporarySuspendedModal = ({ onReturnToLogin }) => {
+const TemporarySuspendedModal = ({ onContinueToWebsite }) => {
   return (
     <div className="suspended-modal-backdrop">
       <div
@@ -24,9 +24,9 @@ const TemporarySuspendedModal = ({ onReturnToLogin }) => {
         <button
           type="button"
           className="suspended-modal-button"
-          onClick={onReturnToLogin}
+          onClick={onContinueToWebsite}
         >
-          Return to sign in
+          Continue to website
         </button>
       </div>
     </div>
