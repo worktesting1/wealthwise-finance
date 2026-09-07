@@ -4,8 +4,8 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
-  const baseUrl = "https://wealthwise-api-lac.vercel.app";
-  // const baseUrl = "http://localhost:5000";
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || "";
+  // Falls back to "" (relative URLs) so Vite proxy forwards /api/* to the local Next.js backend
   const [kycStatus, setKycStatus] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -100,7 +100,16 @@ const AppProvider = ({ children }) => {
           sessionStorage.setItem("user", JSON.stringify(data.data));
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        if (
+          error?.response?.status === 403 &&
+          error?.response?.data?.code === "ACCOUNT_SUSPENDED"
+        ) {
+          sessionStorage.removeItem("user");
+          sessionStorage.removeItem("userToken");
+          window.location.replace("/login");
+        }
+      });
   };
 
   const getTotalBalance = (userId, token) => {
@@ -122,9 +131,7 @@ const AppProvider = ({ children }) => {
         headers: { token: accessToken },
       })
       .then((response) => {
-        const status = response?.data?.kyc?.status;
-        // Normalise to lowercase so "Pending"/"pending" both match
-        setIsKYC(status != null ? status.toLowerCase() : null);
+        setIsKYC(response?.data?.kyc.status);
       })
       .catch((error) => {});
   };
