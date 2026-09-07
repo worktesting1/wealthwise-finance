@@ -4,8 +4,8 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || "";
-  // Falls back to "" (relative URLs) so Vite proxy forwards /api/* to the local Next.js backend
+  const baseUrl = process.env.REACT_APP_API_BASE_URL || "https://wealthwise-api-lac.vercel.app";
+  // Use the deployed API by default; REACT_APP_API_BASE_URL can override it per environment.
   const [kycStatus, setKycStatus] = useState(false);
   const [loading, setLoading] = useState(false);
 
