@@ -1,9 +1,20 @@
-import React from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, Navigate, useNavigate } from "react-router-dom";
 
 const PrivateRoutes = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  return user ? <Outlet /> : <Navigate to={"/login"} />;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?.isSuspended) {
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("userToken");
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, user?.isSuspended]);
+
+  if (!user || user.isSuspended) return null;
+  return <Outlet />;
 };
 
 export default PrivateRoutes;
