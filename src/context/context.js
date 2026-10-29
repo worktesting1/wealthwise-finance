@@ -4,7 +4,7 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
-  const baseUrl = "https://wealthwise-api-lacs.vercel.app";
+  const baseUrl = "https://wealthwise-api-lac.vercel.app";
   // Use the deployed API by default; REACT_APP_API_BASE_URL can override it per environment.
   const [kycStatus, setKycStatus] = useState(false);
   const [loading, setLoading] = useState(false);
